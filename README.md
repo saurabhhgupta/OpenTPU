@@ -1,10 +1,11 @@
-# UCSB ArchLab OpenTPU Project 
+# OpenTPU
+### Created by Saurabh Gupta & Brandon Pon
 
-OpenTPU is an open-source re-implementation of Google's Tensor Processing Unit (TPU) by the UC Santa Barbara ArchLab.
+OpenTPU is an open-source re-implementation of Google's Tensor Processing Unit (TPU) by the UC Santa Barbara ArchLab. This specific repository includes an add-on of convolution and max pooling.
 
 The TPU is Google's custom ASIC for accelerating the inference phase of neural network computations.
 
-Our design is based on details from Google's paper titled "In-Datacentre Performance Analysis of a Tensor Processing Unit" (https://arxiv.org/abs/1704.04760), which is to appear at ISCA2017. However, no formal spec, interface, or ISA has yet been published for the TPU.
+The design is based on details from Google's paper titled "In-Datacentre Performance Analysis of a Tensor Processing Unit" (https://arxiv.org/abs/1704.04760), which is to appear at ISCA2017. However, no formal spec, interface, or ISA has yet been published for the TPU.
 
 #### The OpenTPU is powered by PyRTL (http://ucsbarchlab.github.io/PyRTL/).
 
@@ -81,12 +82,6 @@ No. There is no publicly available interface or spec for TPU.
 
 ### I'd like to do some analysis/extensions of OpenTPU, but I need Verilog. Do you have a Verilog version?
 PyRTL can can output structural Verilog for the design, using the `OutputToVerilog` function.
-
-### I have suggestions, criticisms, and/or would like to contribute.
-That's not a question, but please get in touch! Email Deeksha (deeksha@cs.ucsb.edu) or Joseph (jmcmahan@cs.ucsb.edu).
-
-### I'm a Distinguished Hardware Engineer at Google and the Lead Architect of the TPU. I see many inefficiencies in your implementation.
-Hi Norm! Tim welcomes you to Santa Barbara to talk about all things TPU :)
 
 
 ## Software details
