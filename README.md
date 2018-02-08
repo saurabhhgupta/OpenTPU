@@ -1,7 +1,7 @@
 # OpenTPU
 ### Created by Saurabh Gupta & Brandon Pon
 
-OpenTPU is an open-source re-implementation of Google's Tensor Processing Unit (TPU) by the UC Santa Barbara ArchLab. This specific repository includes an add-on of convolution and max pooling.
+OpenTPU is an open-source re-implementation of Google's Tensor Processing Unit (TPU) by the UC Santa Barbara ArchLab. This specific repository includes an add-on of convolution, pooling, and programmable normalization.
 
 The TPU is Google's custom ASIC for accelerating the inference phase of neural network computations.
 
@@ -15,7 +15,7 @@ The design is based on details from Google's paper titled "In-Datacentre Perform
 - PyRTL version >= 0.8.5
 - numpy
 
-Both PyRTL and numpy can be installed with pip; e.g., `pip install pyrtl`.
+Both PyRTL and numpy can be installed with pip; e.g., `pip3 install pyrtl`.
 
 ## How to Run
 
