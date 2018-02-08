@@ -34,8 +34,8 @@ To run the Boston housing data regression test in both the hardware and function
 Make sure MATSIZE is set to 16 in config.py, then
 ```
 python3 assembler.py boston.a
-python3 runtpu.py boston.out boston_inputs.npy boston_weights.npy
-python3 sim.py boston.out boston_inputs.npy boston_weights.npy
+python3 runtpu.py boston.out boston_input.npy boston_weights.npy
+python3 sim.py boston.out boston_input.npy boston_weights.npy
 ```
 
 
