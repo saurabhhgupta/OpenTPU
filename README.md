@@ -171,8 +171,7 @@ The core of the compute of the OpenTPU is the parametrizable array of 8-bit Mult
 
 
 ### Accumulator Buffers
-Result vectors from the MM Array are written to a software-specified address in a set of accumulator buffers. Instructions indicate whether values should be added into the value already at the address or\
- overwrite it. MM instructions read from the Unified Buffer (UB) and write to the accumulator buffers; activate instructions read from the accumulator buffers and write to the UB.
+Result vectors from the MM Array are written to a software-specified address in a set of accumulator buffers. Instructions indicate whether values should be added into the value already at the address or overwrite it. MM instructions read from the Unified Buffer (UB) and write to the accumulator buffers; activate instructions read from the accumulator buffers and write to the UB.
 
 
 ### Weight FIFO
