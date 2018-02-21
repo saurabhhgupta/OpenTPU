@@ -30,7 +30,6 @@ def maxPooling(pool_in):
 	1) Verify that input is 1 bit
 	2) If 2 bits, compare the bits
 	3) If 3 or more bits, recursively run max pooling
-	'''
 	if (len(pool_in) == 1):
 		return pool_in[0]
 	elif (len(pool_in) == 2):
@@ -39,7 +38,21 @@ def maxPooling(pool_in):
 		left_bit = maxPooling(pool_in[:len(pool_in) / 2])
 		right_bit = maxPooling(pool_in[len(pool_in) / 2:])
 		return maxBit(left_bit, right_bit)
-
+	'''
+	length = len(pool_in)
+	new_array = [int((length+1)/2)]
+	if (length % 2 == 1): #if odd:
+		if length == 1: #Edge Case: only 1 number in array
+			return pool_in[0]
+		else:
+			new_array[-1] = pool_in[-1]
+	i = 0
+	while i < length - 2:
+		new_array[i] = maxPooling(pool_in[i], pool_in[i+1])
+		i += 2
+	if length == 2: #Size two array left
+		return maxBit(pool_in[0], pool_in[1])
+	return maxPooling(new_array)
 
 def averagePooling():
 	'''
