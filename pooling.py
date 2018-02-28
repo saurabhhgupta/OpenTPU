@@ -98,20 +98,20 @@ def minPooling(pool_in):
 	return minPooling(new_array)
 
 
-def maxNodeComparison(node_a, node_b):
-	# a, b = libutils.match_bitwidth(node_a, node_b)
-	zero = pyrtl.Register(1)
-	one = pyrtl.Register(16)
-	zero <<= 0
-	one <<= 1
-	reg_inv_b = pyrtl.Register(~node_b)
-	reg_inv_b = kogge_stone(one, reg_inv_b)
-	reg_inv_b = kogge_stone(node_a, reg_inv_b)
-	with pyrtl.conditional_assignment:
-		with reg_inv_b[0] == zero:
-			return node_a
-		with pyrtl.otherwise:
-			return node_b
+# def maxNodeComparison(node_a, node_b):
+# 	# a, b = libutils.match_bitwidth(node_a, node_b)
+# 	zero = pyrtl.Register(1)
+# 	one = pyrtl.Register(16)
+# 	zero <<= 0
+# 	one <<= 1
+# 	reg_inv_b = pyrtl.Register(~node_b)
+# 	reg_inv_b = kogge_stone(one, reg_inv_b)
+# 	reg_inv_b = kogge_stone(node_a, reg_inv_b)
+# 	with pyrtl.conditional_assignment:
+# 		with reg_inv_b[0] == zero:
+# 			return node_a
+# 		with pyrtl.otherwise:
+# 			return node_b
 
 
 
