@@ -28,7 +28,10 @@ def minBit(in0, in1):
 	out_reg.next <<= out
 	return out_reg # return the reg, not wire
 
-def maxPooling(pool_in):
+# finalized up until this point
+# -----------------------------------------------------------------
+
+def linePool(line_in, used_width, pool_width):
 	'''
 	Approach for max pooling:
 	1) Verify that input is 1 bit
@@ -44,26 +47,56 @@ def maxPooling(pool_in):
 		return maxBit(left_bit, right_bit)
 	'''
 
-	length = len(pool_in)
-	new_array = []
-	if (length % 2 == 1): #if odd:
-		if length == 1: #Edge Case: only 1 number in array
-			return pool_in[0]
-		else:
-			new_array.append(pool_in[-1])
-	i = 0
-	while i < length - 2:
-		new_array.append(maxBit(pool_in[i], pool_in[i+1]))
-		i += 2
-	if length == 2: #Size two array left
-		return maxBit(pool_in[0], pool_in[1])
-	return maxPooling(new_array)
+	# PREVIOUSLY WORKING SOLUTION
+	# new_array = []
+	# if (len(pool_in) % 2 == 1): #if odd:
+	# 	if len(pool_in) == 1: #Edge Case: only 1 number in array
+	# 		return pool_in[0]
+	# 	else:
+	# 		new_array.append(pool_in[-1])
+	# i = 0
+	# while i < len(pool_in) - 2:
+	# 	new_array.append(maxBit(pool_in[i], pool_in[i+1]))
+	# 	i += 2
+	# if length == 2: #Size two array left
+	# 	return maxBit(pool_in[0], pool_in[1])
+	# return maxPooling(new_array)
 
+	'''
+	NEW SOLUTION with rotating matrix
+	Assumptions:
+	1) pool_in is an array of fixed size (width of mmu)
+	2) matrix width is the amount used in pool_in
+	3) pool width fits into the matrix width (used width) perfectly
+	4) max/min bit can compare "x" bits
+	'''
 
-# def averagePooling():
 	'''
-	Approach for avg pooling:
+	Approach (ACTUAL APPROACH):
+	1) perform initial line pool to create intermediate matrix which will be stored in buffer
+	2) rotate and perform line pool again which will result in compressed, desired matrix
 	'''
+
+	index = 0
+	line_out = []
+	while index < (used_width - 1):
+		pool_array = []
+		i = 0
+		for i in range(pool_width):
+			pool_array.append(line_in[index + i])
+		index += pool_width
+		line_out.append(maxBit(pool_array))
+	return line_out
+
+def maxPool(input_addr_list, intermediate_addr_list):
+	'''
+	input_addr_list: list of addresses for first array (FIFO)
+	intermediate_addr_list: list of addresses for line_out   
+	'''
+	result = []
+	for i in intermediate_addr_list:
+		
+
 
 
 def minPooling(pool_in):
@@ -101,7 +134,8 @@ def minPooling(pool_in):
 # def maxNodeComparison(node_a, node_b):
 # 	# a, b = libutils.match_bitwidth(node_a, node_b)
 # 	zero = pyrtl.Register(1)
-# 	one = pyrtl.Register(16)
+# 	one = pyrtl.Register(16)ls
+
 # 	zero <<= 0
 # 	one <<= 1
 # 	reg_inv_b = pyrtl.Register(~node_b)
