@@ -6,7 +6,7 @@ from pyrtl.rtllib import adders
 from pyrtl.rtllib import libutils
 
 
-def maxBit(in0, in1):
+def maxSimple(in0, in1):
 	out = pyrtl.WireVector(32) # 32-bit wire - output
 	out_reg = pyrtl.Register(32) # 32-bit register - output
 	with pyrtl.conditional_assignment:
@@ -17,7 +17,7 @@ def maxBit(in0, in1):
 	out_reg.next <<= out
 	return out_reg # return the reg, not wire
 
-def minBit(in0, in1):
+def minSimple(in0, in1):
 	out = pyrtl.WireVector(32) # 32-bit wire - output
 	out_reg = pyrtl.Register(32) # 32-bit register - output
 	with pyrtl.conditional_assignment:
@@ -27,6 +27,25 @@ def minBit(in0, in1):
 			out |= in1 # output is in1
 	out_reg.next <<= out
 	return out_reg # return the reg, not wire
+
+def maxComplex(pool_array):
+	'''
+	Re-used old maxPooling code: recursively splits the array in a
+	binary tree like fashion to do comparisons with the maxSimple
+	function
+	'''
+	if (len(pool_in) == 1):
+		return pool_in[0]
+	elif (len(pool_in) == 2):
+		return maxSimple(pool_in[0], pool_in[1])
+	else:
+		left_bit = maxComplex(pool_in[:len(pool_in) / 2])
+		right_bit = maxComplex(pool_in[len(pool_in) / 2:])
+	return maxSimple(left_bit, right_bit)
+
+
+def minComplex(pool_array):
+
 
 # finalized up until this point
 # -----------------------------------------------------------------
@@ -46,7 +65,6 @@ def linePool(line_in, used_width, pool_width):
 		right_bit = maxPooling(pool_in[len(pool_in) / 2:])
 		return maxBit(left_bit, right_bit)
 	'''
-
 	# PREVIOUSLY WORKING SOLUTION
 	# new_array = []
 	# if (len(pool_in) % 2 == 1): #if odd:
@@ -61,7 +79,6 @@ def linePool(line_in, used_width, pool_width):
 	# if length == 2: #Size two array left
 	# 	return maxBit(pool_in[0], pool_in[1])
 	# return maxPooling(new_array)
-
 	'''
 	NEW SOLUTION with rotating matrix
 	Assumptions:
@@ -70,13 +87,11 @@ def linePool(line_in, used_width, pool_width):
 	3) pool width fits into the matrix width (used width) perfectly
 	4) max/min bit can compare "x" bits
 	'''
-
 	'''
 	Approach (ACTUAL APPROACH):
 	1) perform initial line pool to create intermediate matrix which will be stored in buffer
 	2) rotate and perform line pool again which will result in compressed, desired matrix
 	'''
-
 	index = 0
 	line_out = []
 	while index < (used_width - 1):
@@ -85,18 +100,36 @@ def linePool(line_in, used_width, pool_width):
 		for i in range(pool_width):
 			pool_array.append(line_in[index + i])
 		index += pool_width
-		line_out.append(maxBit(pool_array))
+		line_out.append(maxComplex(pool_array))
 	return line_out
 
-def maxPool(input_addr_list, intermediate_addr_list):
+def maxPool(input_addr_list, intermediate_addr_list, result_addr_list, pool_width):
 	'''
 	input_addr_list: list of addresses for first array (FIFO)
 	intermediate_addr_list: list of addresses for line_out   
 	'''
 	result = []
-	for i in intermediate_addr_list:
-		
-
+	used_width = len(input_addr_list)
+	current_line = []
+	output_line = []
+	i = 0
+	for i in range(len(input_addr_list)):
+		#initial loop to create intermediate matrix
+		current_line = read_data(input_addr_list[i]) #replace with correct syntax for addressing
+		output_line = linePool(current_line)
+		write_data(intermediate_addr_list[i])
+	i = 0
+	for i in range(used_width/pool_width):
+		'''
+		second loop to complete pooling of array.
+		should write to resulting addr list in correct orientation
+		'''
+		intermediate_array = []
+		j = 0
+		for j in range(used_width): #create array to pass into linePool
+			intermediate_array.append(read_data(intermediate_addr_list[j][i]))
+		output_line = linePool(intermediate_array)
+		write_data(result_addr_list[i])
 
 
 def minPooling(pool_in):
