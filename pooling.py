@@ -32,7 +32,7 @@ def maxComplex(pool_array):
 	'''
 	Re-used old maxPooling code: recursively splits the array in a
 	binary tree like fashion to do comparisons with the maxSimple
-	function
+	function (which makes comparisons with only two numbers)
 	'''
 	if (len(pool_in) == 1):
 		return pool_in[0]
@@ -103,34 +103,53 @@ def linePool(line_in, used_width, pool_width):
 		line_out.append(maxComplex(pool_array))
 	return line_out
 
-def maxPool(input_addr_list, intermediate_addr_list, result_addr_list, pool_width):
+def maxPool(input_addr_list, intermediate_addr_list, result_addr_list, MMU_width, pool_width):
 	'''
 	input_addr_list: list of addresses for first array (FIFO)
 	intermediate_addr_list: list of addresses for line_out   
+	NEED CLOCK?
 	'''
 	result = []
 	used_width = len(input_addr_list)
 	current_line = []
-	output_line = []
+	input_array = []
+	intermediate_array = []
+	result_array = []
+
+	#array of memory blocks for addressing
+	input_mem = []
+	i = 0
+	for i in range(len(input_addr_list)):
+		input_mem.append(MemBlock(bitwidth = 32, addrwidth = MMU_width))
+		input_array.append(input_mem[input_addr_list[i]])
+	int_mem = []
+	i = 0
+	for i in range(len(intermediate_addr_list)):
+		int_mem.append(MemBlock(bitwidth = 32, addrwidth = MMU_width/pool))
+		intermediate_array.append(int_mem[intermediate_addr_list[i]])
+	i = 0
+	result_mem = []
+	for i in range(len(result_addr_list)):
+		result_mem.append(MemBlock(bitwidth = 32, addrwidth = pool_width))
+		result_array.append(result_mem[result_addr_list[i]])
 	i = 0
 	for i in range(len(input_addr_list)):
 		#initial loop to create intermediate matrix
-		current_line = read_data(input_addr_list[i]) #replace with correct syntax for addressing
+		current_line = input_array[i]#replace with correct syntax for addressing
 		output_line = linePool(current_line)
-		write_data(intermediate_addr_list[i])
+		intermediate_array[i] = output_line
 	i = 0
 	for i in range(used_width/pool_width):
 		'''
 		second loop to complete pooling of array.
 		should write to resulting addr list in correct orientation
 		'''
-		intermediate_array = []
+		rearranged_intermediate_array = []
 		j = 0
 		for j in range(used_width): #create array to pass into linePool
-			intermediate_array.append(read_data(intermediate_addr_list[j][i]))
+			intermediate_array.append(read_data(intermediate_array[j][i])) #how to access individual 32-bit vals?
 		output_line = linePool(intermediate_array)
-		write_data(result_addr_list[i])
-
+		result_array[i] = output_line
 
 def minPooling(pool_in):
 	'''
