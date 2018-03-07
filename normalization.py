@@ -18,8 +18,12 @@ Use Case:
 
 '''
 Naive Normalization
+min-max normalization:
+(val-min)/(max-min)
 
 '''
+def nrml(din):
+
 
 def ReLU(vector, offset):
     assert offset <= 24
