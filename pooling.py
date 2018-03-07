@@ -76,13 +76,14 @@ def maxPool(pool_in):
 	return maxPool(new_array)
 
 
-def maxPool_top(accum_out, matrix_size, pool_size):
+def pool_top(accum_mem, matrix_size, pool_size, raddr, done):
 	'''
 	Input:
 	matrix_width - width of overall matrix
 	pool_width - width of pooling matrix
-	waddr - write address
-	raddr - read address
+	raddr - read address of accum_out
+	done - accumulator done
+	accum_mem = array of memblocks in accumulators. need to modify accumulators
 
 	Output:
 	Returns resulting pooled matrix as pool_out
@@ -91,22 +92,21 @@ def maxPool_top(accum_out, matrix_size, pool_size):
 
 	how to clock this? registers?
 	what exact format is accum_out? 2d array or flattened 2D array?
+	Brandon's Theory:
+		accum_out is the output array from accumulator of 32b x matrix_size given an addr
 	'''
 	pool_out = []
-	level = 0
-	while level < pool_size:
-		x_index = 0
-		pool_in = []
-		while x_increment < pool_size:
-			y_index = level*pool_size
-			while y_increment < pool_size:
-				too_add_val = [addr + y_increment] #shitty pseudo code
-				#insert appending val to pool_in.
-				y_increment+= 1
-		pool_out.append(maxPool(pool_in)) #flattened matrix in order as if reading a book
-		level += 1
-	return pool_out
-
+	row_start = raddr
+	with conditional_assignment:
+		with done: #if accumulators is "done"
+			for levels in range(0, matrix_size, pool_width): #steps through accumulator memory
+				pool_in = []
+				for column in range(0,matrix_size):
+					row_start += pool_size
+					for row in range(row_start, row_start+pool_size):
+						pool_in.append(accum_mem[column][row])
+				pool_out.append(maxPool(pool_in))
+			return pool_out
 
 # instantiate relu and set test inputs
 din = []
