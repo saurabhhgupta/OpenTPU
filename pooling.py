@@ -6,7 +6,7 @@ from pyrtl.rtllib import adders
 from pyrtl.rtllib import libutils
 
 
-def maxSimple(in0, in1):
+def maxBit(in0, in1):
 	out = pyrtl.WireVector(32) # 32-bit wire - output
 	out_reg = pyrtl.Register(32) # 32-bit register - output
 	with pyrtl.conditional_assignment:
@@ -17,7 +17,7 @@ def maxSimple(in0, in1):
 	out_reg.next <<= out
 	return out_reg # return the reg, not wire
 
-def minSimple(in0, in1):
+def minBit(in0, in1):
 	out = pyrtl.WireVector(32) # 32-bit wire - output
 	out_reg = pyrtl.Register(32) # 32-bit register - output
 	with pyrtl.conditional_assignment:
@@ -28,57 +28,29 @@ def minSimple(in0, in1):
 	out_reg.next <<= out
 	return out_reg # return the reg, not wire
 
-def maxComplex(pool_array):
-	'''
-	Re-used old maxPooling code: recursively splits the array in a
-	binary tree like fashion to do comparisons with the maxSimple
-	function (which makes comparisons with only two numbers)
-	'''
-	if (len(pool_in) == 1):
-		return pool_in[0]
-	elif (len(pool_in) == 2):
-		return maxSimple(pool_in[0], pool_in[1])
-	else:
-		left_bit = maxComplex(pool_in[:len(pool_in) / 2])
-		right_bit = maxComplex(pool_in[len(pool_in) / 2:])
-	return maxSimple(left_bit, right_bit)
+# def maxComplex(pool_array):
+# 	'''
+# 	Re-used old maxPooling code: recursively splits the array in a
+# 	binary tree like fashion to do comparisons with the maxSimple
+# 	function (which makes comparisons with only two numbers)
+# 	'''
+# 	if (len(pool_in) == 1):
+# 		return pool_in[0]
+# 	elif (len(pool_in) == 2):
+# 		return maxSimple(pool_in[0], pool_in[1])
+# 	else:
+# 		left_bit = maxComplex(pool_in[:len(pool_in) / 2])
+# 		right_bit = maxComplex(pool_in[len(pool_in) / 2:])
+# 	return maxSimple(left_bit, right_bit)
 
 
-def minComplex(pool_array):
+# def minComplex(pool_array):
 
 
 # finalized up until this point
 # -----------------------------------------------------------------
 
 def linePool(line_in, used_width, pool_width):
-	'''
-	Approach for max pooling:
-	1) Verify that input is 1 bit
-	2) If 2 bits, compare the bits
-	3) If 3 or more bits, recursively run max pooling
-	if (len(pool_in) == 1):
-		return pool_in[0]
-	elif (len(pool_in) == 2):
-		return maxBit(pool_in[0], pool_in[1])
-	else:
-		left_bit = maxPooling(pool_in[:len(pool_in) / 2])
-		right_bit = maxPooling(pool_in[len(pool_in) / 2:])
-		return maxBit(left_bit, right_bit)
-	'''
-	# PREVIOUSLY WORKING SOLUTION
-	# new_array = []
-	# if (len(pool_in) % 2 == 1): #if odd:
-	# 	if len(pool_in) == 1: #Edge Case: only 1 number in array
-	# 		return pool_in[0]
-	# 	else:
-	# 		new_array.append(pool_in[-1])
-	# i = 0
-	# while i < len(pool_in) - 2:
-	# 	new_array.append(maxBit(pool_in[i], pool_in[i+1]))
-	# 	i += 2
-	# if length == 2: #Size two array left
-	# 	return maxBit(pool_in[0], pool_in[1])
-	# return maxPooling(new_array)
 	'''
 	NEW SOLUTION with rotating matrix
 	Assumptions:
@@ -103,129 +75,20 @@ def linePool(line_in, used_width, pool_width):
 		line_out.append(maxComplex(pool_array))
 	return line_out
 
-def maxPool(input_addr_list, intermediate_addr_list, result_addr_list, MMU_width, pool_width):
-	'''
-	input_addr_list: list of addresses for first array (FIFO)
-	intermediate_addr_list: list of addresses for line_out   
-	NEED CLOCK?
-	'''
-	result = []
-	used_width = len(input_addr_list)
-	current_line = []
-	input_array = []
-	intermediate_array = []
-	result_array = []
-
-	#array of memory blocks for addressing
-	input_mem = []
-	i = 0
-	for i in range(len(input_addr_list)):
-		input_mem.append(MemBlock(bitwidth = 32, addrwidth = MMU_width))
-		input_array.append(input_mem[input_addr_list[i]])
-	int_mem = []
-	i = 0
-	for i in range(len(intermediate_addr_list)):
-		int_mem.append(MemBlock(bitwidth = 32, addrwidth = MMU_width/pool))
-		intermediate_array.append(int_mem[intermediate_addr_list[i]])
-	i = 0
-	result_mem = []
-	for i in range(len(result_addr_list)):
-		result_mem.append(MemBlock(bitwidth = 32, addrwidth = pool_width))
-		result_array.append(result_mem[result_addr_list[i]])
-	i = 0
-	for i in range(len(input_addr_list)):
-		#initial loop to create intermediate matrix
-		current_line = input_array[i]#replace with correct syntax for addressing
-		output_line = linePool(current_line)
-		intermediate_array[i] = output_line
-	i = 0
-	for i in range(used_width/pool_width):
-		'''
-		second loop to complete pooling of array.
-		should write to resulting addr list in correct orientation
-		'''
-		rearranged_intermediate_array = []
-		j = 0
-		for j in range(used_width): #create array to pass into linePool
-			intermediate_array.append(read_data(intermediate_array[j][i])) #how to access individual 32-bit vals?
-		output_line = linePool(intermediate_array)
-		result_array[i] = output_line
-
-def minPooling(pool_in):
-	'''
-	Approach for min pooling:
-	1) Verify that input is 1 bit
-	2) If 2 bits, compare the bits
-	3) If 3 or more bits, recursively run min pooling
-	'''
-	# if (len(pool_in) == 1):
-	# 	return pool_in[0]
-	# elif (len(pool_in) == 2):
-	# 	return minBit(pool_in[0], pool_in[1])
-	# else:
-	# 	left_bit = minPooling(pool_in[:len(pool_in) / 2])
-	# 	right_bit = minPooling(pool_in[len(pool_in) / 2:])
-	# 	return minBit(left_bit, right_bit)
-
-	length = len(pool_in)
+def maxPool(pool_in):
 	new_array = []
-	if (length % 2 == 1): #if odd:
-		if length == 1: #Edge Case: only 1 number in array
+	if (len(pool_in) % 2 == 1): #if odd:
+		if len(pool_in) == 1: #Edge Case: only 1 number in array
 			return pool_in[0]
 		else:
 			new_array.append(pool_in[-1])
 	i = 0
-	while i < length - 2:
-		new_array.append(minBit(pool_in[i], pool_in[i+1]))
+	while i < len(pool_in) - 2:
+		new_array.append(maxBit(pool_in[i], pool_in[i+1]))
 		i += 2
-	if length == 2: #Size two array left
-		return minBit(pool_in[0], pool_in[1])
-	return minPooling(new_array)
-
-
-# def maxNodeComparison(node_a, node_b):
-# 	# a, b = libutils.match_bitwidth(node_a, node_b)
-# 	zero = pyrtl.Register(1)
-# 	one = pyrtl.Register(16)ls
-
-# 	zero <<= 0
-# 	one <<= 1
-# 	reg_inv_b = pyrtl.Register(~node_b)
-# 	reg_inv_b = kogge_stone(one, reg_inv_b)
-# 	reg_inv_b = kogge_stone(node_a, reg_inv_b)
-# 	with pyrtl.conditional_assignment:
-# 		with reg_inv_b[0] == zero:
-# 			return node_a
-# 		with pyrtl.otherwise:
-# 			return node_b
-
-
-
-
-
-# def treeCompare(node_one, node_two):
-# 	odd_reg = pyrtl.Register(bitwidth=16, name=odd_reg)
-
-
-
-
-
-
-# def maxPool(pool_in, width):
-# 	# width is the "used" portion of pool_in (how much of pool_in is actually used)
-# 	# pool_in is 256-bit wide array
-	# carry_save = pyrtl.Register(bitwidth=16, name'carry_save')
-
-
-
-
-
-
-
-
-
-
-
+	if len(pool_in) == 2: #Size two array left
+		return maxBit(pool_in[0], pool_in[1])
+	return maxPool(new_array)
 
 
 # instantiate relu and set test inputs
@@ -263,7 +126,7 @@ din.append(din8)
 
 # print(maxNodeComparison(din4, din6))
 
-dout = maxPooling(din)
+dout = maxPool(din)
 cmpr_out = pyrtl.Register(bitwidth=32, name='cmpr_out')
 cmpr_out.next <<= dout 
 
