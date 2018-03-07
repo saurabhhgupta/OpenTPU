@@ -58,6 +58,13 @@ ub_mm_raddr_sig, acc_out, mm_busy, mm_done = MMU_top(data_width=DWIDTH, matrix_s
 ub_mm_raddr <<= ub_mm_raddr_sig
 
 ############################################################
+#  Normalization / Pool Unit
+############################################################
+
+out_pool = maxPool_top(accum_out=acc_out, matrix_size=MATSIZE, pool_size=8)
+
+
+############################################################
 #  Activate Unit
 ############################################################
 

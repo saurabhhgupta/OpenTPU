@@ -10,6 +10,8 @@ Notes:
 -Imported same headers as pooling.py
 -Contains both a naive normalization function and ReLU implementation
 
+
+
 Use Case:
 
 '''
@@ -18,11 +20,34 @@ Use Case:
 Naive Normalization
 
 '''
-def normal():
-	pass
 
-'''
-Rectified Linear Unit
-	- looks like they alreayd implemented RELU?
-'''
-def ReLU():
+def ReLU(vector, offset):
+    assert offset <= 24
+    return concat_list([select(d[-1], falsecase=d, truecase=Const(0, len(d)))[24-offset:32-offset] for d in vector])
+
+def relu_nrml(din, offset=0):
+ 	assert len(din) == 32 
+	assert offset <= 24
+	dout = pyrtl.WireVector(32)
+	with pyrtl.conditional_assignment: 
+		with din[-1] == 0: 
+			dout |= din
+		with pyrtl.otherwise:
+			dout |= 0 
+	return dout[24-offset:32-offset]
+
+
+# Test: collects only the 8 LSBs (after relu)
+relu_in = pyrtl.Register(bitwidth=32, name='din')
+relu_in.next <<= 300
+offset = 24
+dout = relu_nrml(relu_in, offset)
+relu_out = pyrtl.Register(bitwidth=8, name='dout')
+relu_out.next <<= dout 
+
+# simulate the instantiated design for 15 cycles
+sim_trace = pyrtl.SimulationTrace()
+sim = pyrtl.Simulation(tracer=sim_trace)
+for cyle in range(35):
+	sim.step({})
+sim_trace.render_trace()  

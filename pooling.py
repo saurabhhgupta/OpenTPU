@@ -28,27 +28,6 @@ def minBit(in0, in1):
 	out_reg.next <<= out
 	return out_reg # return the reg, not wire
 
-# def maxComplex(pool_array):
-# 	'''
-# 	Re-used old maxPooling code: recursively splits the array in a
-# 	binary tree like fashion to do comparisons with the maxSimple
-# 	function (which makes comparisons with only two numbers)
-# 	'''
-# 	if (len(pool_in) == 1):
-# 		return pool_in[0]
-# 	elif (len(pool_in) == 2):
-# 		return maxSimple(pool_in[0], pool_in[1])
-# 	else:
-# 		left_bit = maxComplex(pool_in[:len(pool_in) / 2])
-# 		right_bit = maxComplex(pool_in[len(pool_in) / 2:])
-# 	return maxSimple(left_bit, right_bit)
-
-
-# def minComplex(pool_array):
-
-
-# finalized up until this point
-# -----------------------------------------------------------------
 
 def linePool(line_in, used_width, pool_width): #OLD. UNUSED
 	'''
@@ -113,19 +92,20 @@ def maxPool_top(accum_out, matrix_size, pool_size):
 	how to clock this? registers?
 	what exact format is accum_out? 2d array or flattened 2D array?
 	'''
+	pool_out = []
 	level = 0
 	while level < pool_size:
 		x_index = 0
 		pool_in = []
 		while x_increment < pool_size:
 			y_index = level*pool_size
-
 			while y_increment < pool_size:
 				too_add_val = [addr + y_increment] #shitty pseudo code
 				#insert appending val to pool_in.
 				y_increment+= 1
 		pool_out.append(maxPool(pool_in)) #flattened matrix in order as if reading a book
 		level += 1
+	return pool_out
 
 
 # instantiate relu and set test inputs
