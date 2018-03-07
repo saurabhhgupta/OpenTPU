@@ -50,7 +50,7 @@ def minBit(in0, in1):
 # finalized up until this point
 # -----------------------------------------------------------------
 
-def linePool(line_in, used_width, pool_width):
+def linePool(line_in, used_width, pool_width): #OLD. UNUSED
 	'''
 	NEW SOLUTION with rotating matrix
 	Assumptions:
@@ -58,8 +58,7 @@ def linePool(line_in, used_width, pool_width):
 	2) matrix width is the amount used in pool_in
 	3) pool width fits into the matrix width (used width) perfectly
 	4) max/min bit can compare "x" bits
-	'''
-	'''
+
 	Approach (ACTUAL APPROACH):
 	1) perform initial line pool to create intermediate matrix which will be stored in buffer
 	2) rotate and perform line pool again which will result in compressed, desired matrix
@@ -75,7 +74,14 @@ def linePool(line_in, used_width, pool_width):
 		line_out.append(maxComplex(pool_array))
 	return line_out
 
-def maxPool(pool_in):
+def maxPool(pool_in):	
+	'''
+	Inputs:
+	pool_in - flattened matrix to be max pooled.
+
+	Output:
+	returns max value
+	'''
 	new_array = []
 	if (len(pool_in) % 2 == 1): #if odd:
 		if len(pool_in) == 1: #Edge Case: only 1 number in array
@@ -89,6 +95,37 @@ def maxPool(pool_in):
 	if len(pool_in) == 2: #Size two array left
 		return maxBit(pool_in[0], pool_in[1])
 	return maxPool(new_array)
+
+
+def maxPool_top(accum_out, matrix_size, pool_size):
+	'''
+	Input:
+	matrix_width - width of overall matrix
+	pool_width - width of pooling matrix
+	waddr - write address
+	raddr - read address
+
+	Output:
+	Returns resulting pooled matrix as pool_out
+		- should this be stored in a given addr instead? In Unified buffer?
+		- stored as 8bit? Need to truncate?
+
+	how to clock this? registers?
+	what exact format is accum_out? 2d array or flattened 2D array?
+	'''
+	level = 0
+	while level < pool_size:
+		x_index = 0
+		pool_in = []
+		while x_increment < pool_size:
+			y_index = level*pool_size
+
+			while y_increment < pool_size:
+				too_add_val = [addr + y_increment] #shitty pseudo code
+				#insert appending val to pool_in.
+				y_increment+= 1
+		pool_out.append(maxPool(pool_in)) #flattened matrix in order as if reading a book
+		level += 1
 
 
 # instantiate relu and set test inputs
