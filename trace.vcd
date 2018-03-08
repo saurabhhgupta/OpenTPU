@@ -4,10 +4,10 @@ $var wire 1 assertion0 assertion0 $end
 $var wire 1 assertion1 assertion1 $end
 $var wire 1 hostmem_re hostmem_re $end
 $var wire 64 raddr raddr $end
-$var wire 4 weights_count weights_count $end
+$var wire 3 weights_count weights_count $end
 $var wire 512 weights_dram_in weights_dram_in $end
 $var wire 1 weights_dram_valid weights_dram_valid $end
-$var wire 5 weights_wait weights_wait $end
+$var wire 4 weights_wait weights_wait $end
 $upscope $end
 $enddefinitions $end
 $dumpvars
@@ -37,7 +37,7 @@ b1 raddr
 b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #2
 b1 assertion0
 b1 assertion1
@@ -46,43 +46,43 @@ b10 raddr
 b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #3
 b1 assertion0
 b1 assertion1
 b1 hostmem_re
 b11 raddr
 b0 weights_count
-b11000101000000011011111111110110111100100000010111110110111110010000000000000000000000000000000000000000000000000000000000000000111010100000010100000010111101011111000000011111000000001110011100000000000000000000000000000000000000000000000000000000000000001110100000100000111101100010000111111111111001100001001011111010000000000000000000000000000000000000000000000000000000000000000010000001000001101111010100010011101100100010001011100011000000000000000000000000000000000000000000000000000000000000000000000000 weights_dram_in
+b1111110100001111000011110000111100001111000011110000111100001111000011101111110100001111000011110000111100001111000011110000111100001111000011101111110100001111000011110000111100001111000011110000111100001111000011101111110100001111000011110000111100001111000011110000111100001111000011101111110100001111000011110000111100001111000011110000111100001111000011101111110100001111000011110000111100001111000011110000111100001111000011101111110100001111000011110000111100001111000011110000111100001111000011101111110 weights_dram_in
 b1 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #4
 b1 assertion0
 b1 assertion1
 b1 hostmem_re
 b100 raddr
 b0 weights_count
-b11010111101010000010011101001111111001101000100000000111010100000000000000000000000000000000000000000000000000000000000000000000110100001011000100010111010011111011000000100000010011110100000000000000000000000000000000000000000000000000000000000000000001110010100000111111100010001100100011010000001111111101011110010000000000000000000000000000000000000000000000000000000000000000011101110111100011111010111111110000111100000000000000110110110000000000000000000000000000000000000000000000000000000000000000000 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
 #5
 b1 assertion0
 b1 assertion1
 b1 hostmem_re
 b101 raddr
 b0 weights_count
-b11101010000111101111000000000101000001100001101100010101000110000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000111011101110111011101111000000100000101000000000000000000000000000000000000000000000000000000000000000000000111000000000110111111110001000001001000011101111011100010000000000000000000000000000000000000000000000000000000000000000000000011100000010010000000011111101111110100000101100000010111111010000000000000000000000000000000000000000000000000000000000000000 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
 #6
 b1 assertion0
 b1 assertion1
 b1 hostmem_re
 b110 raddr
 b0 weights_count
-b10111000110001011111011110000010101111010011100001111101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
 #7
 b1 assertion0
 b1 assertion1
@@ -91,7 +91,7 @@ b111 raddr
 b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #8
 b1 assertion0
 b1 assertion1
@@ -100,35 +100,8 @@ b1000 raddr
 b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #9
-b1 assertion0
-b1 assertion1
-b1 hostmem_re
-b1001 raddr
-b0 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#10
-b1 assertion0
-b1 assertion1
-b1 hostmem_re
-b1010 raddr
-b0 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#11
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b0 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#12
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -136,8 +109,8 @@ b0 raddr
 b1 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
-#13
+b1001 weights_wait
+#10
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -145,8 +118,8 @@ b0 raddr
 b10 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
-#14
+b1001 weights_wait
+#11
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -154,8 +127,8 @@ b0 raddr
 b11 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
-#15
+b1001 weights_wait
+#12
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -163,8 +136,8 @@ b0 raddr
 b100 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
-#16
+b1001 weights_wait
+#13
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -172,8 +145,8 @@ b0 raddr
 b101 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
-#17
+b1001 weights_wait
+#14
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -181,7 +154,34 @@ b0 raddr
 b110 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
+#15
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#16
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#17
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
 #18
 b1 assertion0
 b1 assertion1
@@ -190,1007 +190,782 @@ b0 raddr
 b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #19
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1000 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #20
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1001 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #21
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1010 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #22
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1011 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #23
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1100 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #24
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1101 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #25
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1110 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #26
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #27
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #28
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #29
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #30
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #31
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #32
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #33
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #34
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #35
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #36
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #37
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #38
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #39
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #40
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #41
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #42
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #43
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #44
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #45
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
-b110000011111111111110001100111011010001111000111011110111100010000000000000000000000000000000000000000000000000000000000000000010001010101011011111001010100110101100111100011111110011111010100000000000000000000000000000000000000000000000000000000000000000010101101011100111111110111000001100001111100111111001011110110000000000000000000000000000000000000000000000000000000000000000001000010011001001110100000111000011101011110101011111101111011010000000000000000000000000000000000000000000000000000000000000000 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
 #46
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
-b1001001001110101110101101001100010100011110111111110100111100100000000000000000000000000000000000000000000000000000000000000000000001110101111011100101010110100101001111110000111010011111100100000000000000000000000000000000000000000000000000000000000000000011001101000101000001100100101101000011111011001111000000000010000000000000000000000000000000000000000000000000000000000000000000100101010101111101111001010011011000001110101111101010111101010000000000000000000000000000000000000000000000000000000000000000 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
 #47
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b0 weights_dram_valid
+b1001 weights_wait
 #48
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b0 weights_dram_valid
+b1001 weights_wait
 #49
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #50
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #51
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #52
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #53
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #54
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #55
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #56
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #57
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #58
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #59
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #60
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #61
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #62
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #63
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #64
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #65
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #66
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #67
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #68
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #69
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #70
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #71
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #72
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #73
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #74
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #75
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #76
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #77
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #78
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #79
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #80
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #81
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #82
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #83
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #84
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #85
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #86
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #87
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
-b1011001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
 #88
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
-b1111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001011010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011100100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
 #89
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b0 weights_dram_valid
+b1001 weights_wait
 #90
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
-b1 weights_dram_valid
-b10001 weights_wait
+b0 weights_dram_valid
+b1001 weights_wait
 #91
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #92
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #93
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #94
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #95
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #96
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #97
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #98
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #99
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #100
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #101
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #102
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #103
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #104
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #105
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#106
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#107
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#108
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#109
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#110
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#111
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#112
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#113
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#114
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#115
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#116
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#117
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#118
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#119
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#120
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#121
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#122
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#123
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#124
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#125
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#126
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#127
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#128
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#129
-b1 assertion0
-b1 assertion1
-b0 hostmem_re
-b0 raddr
-b1111 weights_count
-b0 weights_dram_in
-b0 weights_dram_valid
-b10001 weights_wait
-#130
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -1199,7 +974,7 @@ b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b0 weights_wait
-#131
+#106
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -1208,7 +983,7 @@ b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b1 weights_wait
-#132
+#107
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -1217,7 +992,7 @@ b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b10 weights_wait
-#133
+#108
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -1226,7 +1001,7 @@ b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b11 weights_wait
-#134
+#109
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -1235,7 +1010,7 @@ b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b100 weights_wait
-#135
+#110
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -1244,7 +1019,7 @@ b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b101 weights_wait
-#136
+#111
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -1253,7 +1028,7 @@ b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b110 weights_wait
-#137
+#112
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -1262,7 +1037,7 @@ b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b111 weights_wait
-#138
+#113
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
@@ -1271,12 +1046,237 @@ b0 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b1000 weights_wait
-#139
+#114
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
 b0 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#115
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b1 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#116
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b10 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#117
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b11 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#118
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b100 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#119
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b101 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#120
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b110 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#121
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#122
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#123
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#124
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#125
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#126
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#127
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#128
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#129
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#130
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#131
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#132
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#133
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#134
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#135
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#136
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#137
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#138
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#139
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b1001 weights_wait
@@ -1285,127 +1285,127 @@ b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1010 weights_wait
+b1001 weights_wait
 #141
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1011 weights_wait
+b1001 weights_wait
 #142
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1100 weights_wait
+b1001 weights_wait
 #143
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1101 weights_wait
+b1001 weights_wait
 #144
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1110 weights_wait
+b1001 weights_wait
 #145
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1111 weights_wait
+b1001 weights_wait
 #146
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10000 weights_wait
+b1001 weights_wait
 #147
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #148
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #149
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b10 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #150
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b11 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #151
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b100 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #152
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b101 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #153
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b110 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #154
 b1 assertion0
 b1 assertion1
@@ -1414,625 +1414,625 @@ b0 raddr
 b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #155
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1000 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #156
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1001 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #157
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1010 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #158
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1011 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #159
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1100 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #160
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1101 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #161
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1110 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #162
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #163
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #164
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #165
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #166
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #167
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #168
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #169
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #170
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #171
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #172
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #173
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #174
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #175
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #176
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #177
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #178
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #179
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #180
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #181
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #182
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #183
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #184
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #185
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #186
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #187
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #188
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #189
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #190
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #191
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #192
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #193
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #194
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #195
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #196
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #197
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #198
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #199
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #200
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #201
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #202
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #203
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #204
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #205
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #206
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #207
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #208
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #209
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #210
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #211
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #212
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #213
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #214
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b0 weights_wait
+b1001 weights_wait
 #215
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1 weights_wait
+b1001 weights_wait
 #216
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10 weights_wait
+b1001 weights_wait
 #217
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b11 weights_wait
+b1001 weights_wait
 #218
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b100 weights_wait
+b1001 weights_wait
 #219
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b101 weights_wait
+b1001 weights_wait
 #220
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b110 weights_wait
+b1001 weights_wait
 #221
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b111 weights_wait
+b1001 weights_wait
 #222
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1000 weights_wait
+b1001 weights_wait
 #223
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b1001 weights_wait
@@ -2041,127 +2041,127 @@ b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1010 weights_wait
+b1001 weights_wait
 #225
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1011 weights_wait
+b1001 weights_wait
 #226
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1100 weights_wait
+b1001 weights_wait
 #227
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1101 weights_wait
+b1001 weights_wait
 #228
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1110 weights_wait
+b1001 weights_wait
 #229
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1111 weights_wait
+b1001 weights_wait
 #230
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10000 weights_wait
+b1001 weights_wait
 #231
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #232
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #233
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b10 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #234
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b11 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #235
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b100 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #236
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b101 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #237
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b110 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #238
 b1 assertion0
 b1 assertion1
@@ -2170,625 +2170,625 @@ b0 raddr
 b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #239
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1000 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #240
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1001 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #241
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1010 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #242
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1011 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #243
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1100 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #244
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1101 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #245
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1110 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #246
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #247
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #248
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #249
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #250
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #251
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #252
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #253
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #254
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #255
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #256
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #257
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #258
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #259
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #260
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #261
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #262
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #263
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #264
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #265
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #266
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #267
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #268
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #269
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #270
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #271
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #272
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #273
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #274
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #275
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #276
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #277
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #278
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #279
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #280
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #281
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #282
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #283
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #284
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #285
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #286
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #287
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #288
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #289
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #290
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #291
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #292
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #293
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #294
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #295
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #296
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #297
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #298
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b0 weights_wait
+b1001 weights_wait
 #299
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1 weights_wait
+b1001 weights_wait
 #300
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10 weights_wait
+b1001 weights_wait
 #301
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b11 weights_wait
+b1001 weights_wait
 #302
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b100 weights_wait
+b1001 weights_wait
 #303
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b101 weights_wait
+b1001 weights_wait
 #304
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b110 weights_wait
+b1001 weights_wait
 #305
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b111 weights_wait
+b1001 weights_wait
 #306
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1000 weights_wait
+b1001 weights_wait
 #307
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
 b1001 weights_wait
@@ -2797,127 +2797,127 @@ b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1010 weights_wait
+b1001 weights_wait
 #309
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1011 weights_wait
+b1001 weights_wait
 #310
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1100 weights_wait
+b1001 weights_wait
 #311
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1101 weights_wait
+b1001 weights_wait
 #312
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1110 weights_wait
+b1001 weights_wait
 #313
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b1111 weights_wait
+b1001 weights_wait
 #314
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10000 weights_wait
+b1001 weights_wait
 #315
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b0 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #316
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #317
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b10 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #318
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b11 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #319
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b100 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #320
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b101 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #321
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b110 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #322
 b1 assertion0
 b1 assertion1
@@ -2926,896 +2926,968 @@ b0 raddr
 b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #323
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1000 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #324
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1001 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #325
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1010 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #326
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1011 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #327
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1100 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #328
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1101 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #329
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1110 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #330
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #331
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #332
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #333
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #334
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #335
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #336
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #337
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #338
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #339
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #340
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #341
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #342
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #343
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #344
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #345
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #346
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #347
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #348
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #349
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #350
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #351
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #352
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #353
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #354
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #355
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #356
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #357
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #358
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #359
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #360
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #361
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #362
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #363
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #364
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #365
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #366
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #367
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #368
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #369
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #370
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #371
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #372
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #373
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #374
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #375
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #376
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #377
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #378
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #379
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #380
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #381
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #382
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #383
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #384
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #385
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #386
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #387
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #388
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #389
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #390
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #391
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #392
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #393
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #394
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #395
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #396
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #397
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #398
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #399
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #400
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #401
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #402
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #403
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #404
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #405
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #406
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #407
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #408
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #409
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #410
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #411
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #412
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #413
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #414
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #415
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #416
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #417
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #418
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #419
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #420
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #421
 b1 assertion0
 b1 assertion1
 b0 hostmem_re
 b0 raddr
-b1111 weights_count
+b111 weights_count
 b0 weights_dram_in
 b0 weights_dram_valid
-b10001 weights_wait
+b1001 weights_wait
 #422
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#423
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#424
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#425
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#426
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#427
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#428
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#429
+b1 assertion0
+b1 assertion1
+b0 hostmem_re
+b0 raddr
+b111 weights_count
+b0 weights_dram_in
+b0 weights_dram_valid
+b1001 weights_wait
+#430

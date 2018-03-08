@@ -54,14 +54,14 @@ halt <<= dispatch_halt
 ############################################################
 
 ub_mm_raddr_sig, acc_out, mm_busy, mm_done = MMU_top(data_width=DWIDTH, matrix_size=MATSIZE, accum_size=ACC_ADDR_SIZE, ub_size=UB_ADDR_SIZE, start=dispatch_mm, start_addr=ub_start_addr, nvecs=mmc_length, dest_acc_addr=accum_waddr, overwrite=accum_overwrite, swap_weights=switch_weights, ub_rdata=UB2MM, accum_raddr=accum_act_raddr, weights_dram_in=weights_dram_in, weights_dram_valid=weights_dram_valid)
-
+print(acc_out)
 ub_mm_raddr <<= ub_mm_raddr_sig
 
 ############################################################
 #  Normalization / Pool Unit
 ############################################################
 
-out_pool = maxPool_top(accum_out=acc_out, matrix_size=MATSIZE, pool_size=8)
+# out_pool = maxPool_top(accum_out=acc_out, matrix_size=MATSIZE, pool_size=8)
 
 
 ############################################################
