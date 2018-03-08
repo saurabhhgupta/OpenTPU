@@ -75,6 +75,86 @@ def pool_top(done, raddr, final_mem_array, select_sig):
 		raddr += 1
 	return concat_list(value_array)
 
+'''
+Returns amt to shift values by for normalization
+'''
+def find_shift_amt(start, max_val):
+	busy = register(1)
+	counter = register(5) #count max to 32
+	max_val_copy = register(32) #32bit
+
+	with conditional_assignment:
+		with start:
+			busy.next |= 1
+			counter.next |= 1
+			max_val_copy.next |= max_val
+			done.next |= 0
+		with busy:
+			max_val_copy.next |= shift_left_logical(max_val_copy, 1)
+			counter.next |= counter + 1
+			with max_val[0] == 1:
+				busy.next |= 0
+				done.next |= 1
+	return counter, done
+	
+'''
+Naive Normalization
+naive linear normalization:
+Find max val. Shift all vals until MSB of max val is the 8th bit
+ex:
+0001 0010 1110 1111 -> 0000 0000 1001 0111
+
+Inputs:
+en - enable (for clocking)
+
+Outputs:
+returns mem_array of shifted values
+
+1. full_pool to determine largest val
+2. determine shift amount
+	a. shift left until MSB is a 1, then shift right 24 times
+	b. shift all other values right by 24-left_shift_count from part a
+3. shift all values by shift ammount
+'''
+def nrml(nrml_start, act_out, matrix_size, raddr, waddr):
+	mem_array = full_pool(act_out, matrix_size, matrix_size, raddr, waddr)
+	max_val = mem_array[raddr] #correct addr? Re-ask Joseph how addressing works
+	left_shift_count, done = find_shift_amt(nrml_start, max_val)
+	for mem in mem_array:
+		for index in range(0, len(mem)):
+			mem[index] = shight_right_logical(mem[index], 24-left_shift_count)
+	return mem_array
+
+'''
+FROM OLD FOLDER
+'''
+def relu_nrml(din, offset=0): 
+ 	assert len(din) == 32 
+	assert offset <= 24
+	dout = pyrtl.WireVector(32)
+	with pyrtl.conditional_assignment: 
+		with din[-1] == 0: 
+			dout |= din
+		with pyrtl.otherwise:
+			dout |= 0 
+	return dout[24-offset:32-offset]
+
+
+# Test: collects only the 8 LSBs (after relu)
+relu_in = pyrtl.Register(bitwidth=32, name='din')
+relu_in.next <<= 300
+offset = 24
+dout = relu_nrml(relu_in, offset)
+relu_out = pyrtl.Register(bitwidth=8, name='dout')
+relu_out.next <<= dout 
+
+# simulate the instantiated design for 15 cycles
+sim_trace = pyrtl.SimulationTrace()
+sim = pyrtl.Simulation(tracer=sim_trace)
+for cyle in range(35):
+	sim.step({})
+sim_trace.render_trace()  
+
 # instantiate relu and set test inputs
 din = []
 din0 = pyrtl.Register(bitwidth=32, name='din0')
