@@ -68,22 +68,39 @@ def full_pool(act_out, matrix_size, pool_size, raddr, waddr):
 	return final_mem_array
 	# WE NEED A DONE SIGNAL!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-def pool_top(done, raddr, final_mem_array, select_sig):
-	value_array = []
-	for i in final_mem_array:
-		value_array.append(i[raddr])
-		raddr += 1
-	return concat_list(value_array)
+def pool_top(act_out, matrix_size, pool_size, done, raddr, final_mem_array, nrml_en, pool_en, dest_addr):
+	ub_addr = pyrtl.Register(len(dest_addr))
+	counter = pyrtl.Register(matrix_size)
+	output_wire = pyrtl.WireVector(1)
+	output_reg = pyrtl.Register(1)
+	output_list = []
+	with pyrtl.conditional_assignment:
+		with nrml_en:
+			result_array |= normalize()
+			output_reg.next |= 1
+		with pool_en:
+			result_array |= full_pool(act_out, matrix_size, pool_size, raddr, waddr)
+			output_reg.next |= 1
+		with output_reg:
+			for mem in result_array:
+				output_list.append(mem[raddr])
+			output_wire |= concat_list(output_list)
+			ub_addr.next |= ub_addr + 1
+			counter.next |= counter + 1
+			with counter == matrix_size:
+				done |= 1
+	ub_en = output_reg
+	return output_wire
 
 '''
 Returns amt to shift values by for normalization
 '''
 def find_shift_amt(start, max_val):
-	busy = register(1)
-	counter = register(5) #count max to 32
-	max_val_copy = register(32) #32bit
+	busy = Register(1)
+	counter = pyrt.Register(5) # count max to 32
+	max_val_copy = pyrt.Register(32) # 32bit
 
-	with conditional_assignment:
+	with pyrtl.conditional_assignment:
 		with start:
 			busy.next |= 1
 			counter.next |= 1
@@ -116,13 +133,25 @@ returns mem_array of shifted values
 	b. shift all other values right by 24-left_shift_count from part a
 3. shift all values by shift ammount
 '''
-def nrml(nrml_start, act_out, matrix_size, raddr, waddr):
+def normalize(nrml_start, addrwidth, act_out, matrix_size, raddr, waddr):
 	mem_array = full_pool(act_out, matrix_size, matrix_size, raddr, waddr)
-	max_val = mem_array[raddr] #correct addr? Re-ask Joseph how addressing works
+	max_val = mem_array[raddr]
 	left_shift_count, done = find_shift_amt(nrml_start, max_val)
-	for mem in mem_array:
-		for index in range(0, len(mem)):
-			mem[index] = shight_right_logical(mem[index], 24-left_shift_count)
+	busy = pyrtl.Register(1)
+	addr = pyrtl.Register(addrwidth)
+	counter = pyrtl.Register(matrix_size)
+	with pyrtl.conditional_assignment:
+		with nrml_start:
+			busy.next |= 1
+			addr.next |= waddr
+			counter.next |= 0
+		with busy:
+			addr.next |= addr + 1
+			counter.next |= counter + 1
+			for mem in mem_array:
+				shift_left_logical(mem[addr])
+			with counter == matrix_size:
+				busy.next |= 0
 	return mem_array
 
 '''
