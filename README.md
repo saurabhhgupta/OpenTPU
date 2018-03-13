@@ -1,5 +1,5 @@
 # OpenTPU
-### Created by Saurabh Gupta & Brandon Pon
+### Modified by Saurabh Gupta & Brandon Pon
 
 OpenTPU is an open-source re-implementation of Google's Tensor Processing Unit (TPU) by the UC Santa Barbara ArchLab. This specific repository includes an add-on of convolution, pooling, and programmable normalization.
 

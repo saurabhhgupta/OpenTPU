@@ -61,6 +61,7 @@ OPCODE2BIN = {
         'SYNC': (0x5, 0, 0, 0),
         'RHM':  (0x6, HOST_ADDR_SIZE, UB_ADDR_SIZE,   1),
         'HLT':  (0x7, 0, 0, 0),
+        # 'PN':   (0x8, swag, swag, swag) #incomplete
         }
 
 BIN2OPCODE = {v[0]: k for k, v in OPCODE2BIN.items()}

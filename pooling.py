@@ -1,4 +1,5 @@
 import pyrtl
+import math
 from pyrtl import *
 from pyrtl import rtllib
 from pyrtl.rtllib import multipliers
@@ -20,7 +21,7 @@ def bit_compare(in0, in1):
 	out_reg.next <<= out
 	return out_reg
 
-def line_pool(pool_in):	
+def line_pool(pool_in):	#does this need to be clocked?
 	new_array = []
 	if (len(pool_in) % 2 == 1):
 		if len(pool_in) == 1:
@@ -35,18 +36,40 @@ def line_pool(pool_in):
 		return bit_compare(pool_in[0], pool_in[1])
 	return line_pool(new_array)
 
-def intermediate_pool(act_out, matrix_size, pool_size, waddr):
-	line_in = []
-	for i in act_out: # unsure if we can iterate through act_out b/c it's a wire
-		line_in.append(i)
-	int_mem = MemBlock(bitwidth=32, addrwidth=16) # addrwidth needs to be log2 of matrix_size
-	for x in range(0, matrix_size / pool_size):
-		pool_in = []
-		# base_index = x * pool_size
-		for offset in range(0, pool_size):
-			pool_in.append(line_in[(x * pool_size) + offset])
-		int_mem[waddr + x] = line_pool(pool_in)
-	return int_mem #returns a MemBlock to be appended to int_mem_array
+def intermediate_pool(act_out, start, matrix_size, pool_size, nvecs):
+	busy = pyrtl.Register(bitwidth=1)
+	counter = pyrtl.Register(bitwidth=int(math.log2(matrix_size)))
+	done = pyrtl.Register(bitwidth=1)
+	count = 0
+	int_pool_array = [pyrtl.Register(bitwidth=int(math.log2(matrix_size))) for i in range(0, matrix_size)]
+	for i in range(0, int(math.log2(matrix_size)), matrix_size):
+		if (i + int(math.log2(matrix_size))) <= len(act_out):
+			int_pool_array[count] = act_out[i:(i + int(math.log2(matrix_size)))] # How is 'act_out' represented? Binary?
+		else:
+			int_pool_array[count] = act_out[i:(len(act_out))]
+		count += 1
+	with pyrtl.conditional_assignment:
+		with start:
+			busy.next |= 1
+			counter.next |= 1
+			start.next |= 0
+		with 						# Not finished yet!
+		with counter == nvecs:
+			done.next |= 1
+	return int_pool_array, done
+
+# def intermediate_pool(act_out, matrix_size, pool_size, waddr):
+# 	line_in = []
+	# for i in act_out: # unsure if we can iterate through act_out b/c it's a wire
+	# 	line_in.append(i)
+# 	int_mem = MemBlock(bitwidth=32, addrwidth=16) # addrwidth needs to be log2 of matrix_size
+# 	for x in range(0, matrix_size / pool_size):
+# 		pool_in = []
+# 		# base_index = x * pool_size
+# 		for offset in range(0, pool_size):
+# 			pool_in.append(line_in[(x * pool_size) + offset])
+# 		int_mem[waddr + x] = line_pool(pool_in)
+# 	return int_mem #returns a MemBlock to be appended to int_mem_array
 
 def final_pool(matrix_size, pool_size, raddr, waddr, int_mem_array):
 	final_mem = MemBlock(bitwidth=32, addrwidth=16) # addrwidth needs to be log2 of matrix size
@@ -57,31 +80,38 @@ def final_pool(matrix_size, pool_size, raddr, waddr, int_mem_array):
 		final_mem[waddr + x] = line_pool(pool_in)
 	return final_mem #returns a Memblock to be appended into final_mem_array
 
-def full_pool(act_out, matrix_size, pool_size, raddr, waddr):
+def full_pool(act_out, matrix_size, pool_size, raddr, waddr): #do we actually need to pass out the raddr and waddr? can we not keep it internal to full_pool?
 	int_mem_array = []
-	for depth in range(0, matrix_size): #needs to be done in hardware. counter + clock
+	for depth in range(0, matrix_size): #needs to be done in hardware. counter + clock?
 		int_mem_array.append(intermediate_pool(act_out, matrix_size, pool_size, waddr))
-
 	final_mem_array = []
 	for depth in range(0, matrix_size/pool_size):
 		final_mem_array.append(final_pool(matrix_size, pool_size, raddr, waddr, int_mem_array))
 	return final_mem_array
+	# break act_out into an array
 	# WE NEED A DONE SIGNAL!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-def pool_top(act_out, matrix_size, pool_size, done, raddr, final_mem_array, nrml_en, pool_en, dest_addr):
+def pool_top(start, act_out, matrix_size, pool_size, done, nvecs, nrml_en, pool_en, dest_addr):
 	ub_addr = pyrtl.Register(len(dest_addr))
 	counter = pyrtl.Register(matrix_size)
+	ub_waddr = Register(len(dest_addr))
 	output_wire = pyrtl.WireVector(1)
 	output_reg = pyrtl.Register(1)
 	output_list = []
 	with pyrtl.conditional_assignment:
+		with start: #need to complete init of variables
+			count.next |= 0
+			ub_waddr.next |= dest_addr
+			output_reg.next |= 0
 		with nrml_en:
-			result_array |= normalize()
+			# def normalize(nrml_start, addrwidth, act_out, nvecs, raddr, waddr):
+			result_array |= normalize(nrml_start=nrml_en, addrwidth=16, act_out=act_out, nvecs=nvecs, raddr=, waddr=) #
 			output_reg.next |= 1
 		with pool_en:
-			result_array |= full_pool(act_out, matrix_size, pool_size, raddr, waddr)
+			result_array |= full_pool(act_out, nvecs, pool_size, raddr, waddr) #nvecs = to changing matrix_size???
 			output_reg.next |= 1
-		with output_reg:
+		with output_reg: 
+			#add in counter to update nvecs reg
 			for mem in result_array:
 				output_list.append(mem[raddr])
 			output_wire |= concat_list(output_list)
@@ -89,8 +119,8 @@ def pool_top(act_out, matrix_size, pool_size, done, raddr, final_mem_array, nrml
 			counter.next |= counter + 1
 			with counter == matrix_size:
 				done |= 1
-	ub_en = output_reg
-	return output_wire
+	ub_we = output_reg
+	return output_wire new_matrix_size updated_nvecs
 
 '''
 Returns amt to shift values by for normalization
@@ -122,10 +152,15 @@ ex:
 0001 0010 1110 1111 -> 0000 0000 1001 0111
 
 Inputs:
-en - enable (for clocking)
+nrml_start - start normalization block
+addrwidth - addr width of waddr
+act_out - output 
+nvecs
+raddr
+waddr
 
 Outputs:
-returns mem_array of shifted values
+returns mem_array of shifted values (normalized)
 
 1. full_pool to determine largest val
 2. determine shift amount
@@ -133,12 +168,12 @@ returns mem_array of shifted values
 	b. shift all other values right by 24-left_shift_count from part a
 3. shift all values by shift ammount
 '''
-def normalize(nrml_start, addrwidth, act_out, matrix_size, raddr, waddr):
-	mem_array = full_pool(act_out, matrix_size, matrix_size, raddr, waddr)
+def normalize(nrml_start, act_out, nvecs, raddr, waddr):
+	mem_array = full_pool(act_out, nvecs, nvecs, raddr, waddr)
 	max_val = mem_array[raddr]
 	left_shift_count, done = find_shift_amt(nrml_start, max_val)
 	busy = pyrtl.Register(1)
-	addr = pyrtl.Register(addrwidth)
+	addr = pyrtl.Register(16) # addrwidth is log2 of matrix size, 16 for test purposes
 	counter = pyrtl.Register(matrix_size)
 	with pyrtl.conditional_assignment:
 		with nrml_start:

@@ -15,6 +15,8 @@ weights_dram_in = Input(64*8, "weights_dram_in")  # Input signal from weights DR
 weights_dram_valid = Input(1, "weights_dram_valid")  # Valid bit for weights DRAM signal
 halt = Output(1)  # When raised, stop simulation
 
+# current_matrix_size = WireVector(MATSIZE) #expects initial input matrix is the size of the entire MMU
+
 
 ############################################################
 #  Instruction Memory and PC
@@ -54,14 +56,7 @@ halt <<= dispatch_halt
 ############################################################
 
 ub_mm_raddr_sig, acc_out, mm_busy, mm_done = MMU_top(data_width=DWIDTH, matrix_size=MATSIZE, accum_size=ACC_ADDR_SIZE, ub_size=UB_ADDR_SIZE, start=dispatch_mm, start_addr=ub_start_addr, nvecs=mmc_length, dest_acc_addr=accum_waddr, overwrite=accum_overwrite, swap_weights=switch_weights, ub_rdata=UB2MM, accum_raddr=accum_act_raddr, weights_dram_in=weights_dram_in, weights_dram_valid=weights_dram_valid)
-print(acc_out)
 ub_mm_raddr <<= ub_mm_raddr_sig
-
-############################################################
-#  Normalization / Pool Unit
-############################################################
-
-# out_pool = maxPool_top(accum_out=acc_out, matrix_size=MATSIZE, pool_size=8)
 
 
 ############################################################
@@ -80,6 +75,14 @@ with conditional_assignment:
 #probe(ub_act_waddr, "ub_act_waddr")
 #probe(act_out, "act_out")
 #probe(accum_raddr_sig, "accum_raddr")
+
+
+############################################################
+#  Normalization / Pool Unit
+############################################################
+
+# pool_out = pool_top(dest_addr=ub_dest_addr)
+
 
 ############################################################
 #  Read/Write Host Memory
@@ -116,7 +119,6 @@ with conditional_assignment:
         hostmem_we |= 1
         with whm_N == 1:
             whm_busy.next |= 0
-
 
 # Read Host Memory control logic
 #probe(rhm_length, "rhm_length")

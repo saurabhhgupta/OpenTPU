@@ -86,7 +86,8 @@ def decode(instruction):
             rhm_length |= ilength
         with op == isa.OPCODE2BIN['HLT'][0]:
             dispatch_halt |= 1
-
+        # with op == isa.OPCODE2BIN['PN'][0]:
+            #insert instruction value assignment here. reference above
         #with otherwise:
         #    print("otherwise")
 
