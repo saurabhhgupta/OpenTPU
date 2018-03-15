@@ -1,0 +1,33 @@
+pool_top():
+	chooses either pooling or normalization
+	if(pooling):
+		full_pool()
+	else:
+		normalization()
+	returns muxed wire vector of either pooling or normalization
+
+full_pool():
+	create intermediate 2d list of registers (size mat_size)
+	create final 2d list of registers (size mat_size)
+	create line pool 2d list (for storing values necessary for line pool)
+	takes in input list(vector of regs)
+	run intermediate pool()
+	run final pool()
+	return wirevector
+	
+
+intermediate_pool():
+	pass in all vectors. shifts until vectors are at bottom of register array
+	counts and shifts values into line pool 2d array to perform parallel line pooling
+	outpu of line pooling array is shifted into final pool 2d array
+
+final_pool(): #maybe reuse intermediate pool for this step? 
+	waits until final pool array is full
+	counts and shifts values into line pool 2d array to perform parallel line pooling
+	output of final pool is shifted into a list which is wire vectored and output to the UB (what to do about extra width of wire vector if final pool array is only partially full)
+
+normalization():
+	calls full_pool() to find max value
+	finds offset shift 
+	shifts all numbers by 24-offset and truncates
+	returns wirevector to output to UB
