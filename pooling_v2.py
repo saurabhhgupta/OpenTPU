@@ -9,7 +9,7 @@ Compares two values and returns MAX ONLY
 '''
 def bit_compare(in0, in1):
 	out = pyrtl.WireVector(32)
-	with in0[-1] == 1 :
+	with in0[-1] == 1:
 		with in1[-1] == 0:
 			out |= in1
 		with otherwise:
@@ -18,7 +18,7 @@ def bit_compare(in0, in1):
 			with otherwise:
 				out |= in1
 	with in1[-1] == 1:
-		out |= in1
+		out |= in0
 	with otherwise:
 		with in0 >= in1:
 			out |= in0
@@ -122,15 +122,15 @@ def intermediate_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 
 # pyrtl.set_debug_mode()
 
-reg_vec = [pyrtl.Register(32, 'reg_{}'.format(i)) for i in range(0, 8)]
-inputs = [pyrtl.Input(32, 'input_{}'.format(i)) for i in range(0, 8)]
+reg_vec = [pyrtl.Register(32, 'reg_{}'.format(i)) for i in range(0, 9)]
+inputs = [pyrtl.Input(32, 'input_{}'.format(i)) for i in range(0, 9)]
 start = pyrtl.Input(1, 'start')
 start_reg = pyrtl.Register(1, 'start_reg')
-nvecs = pyrtl.Register(4, 'nvecs')
-nvecs.next <<= 8
-mat_size = 8
-pool_size = 2
-vecs_length = 8
+nvecs = pyrtl.Register(5, 'nvecs')
+nvecs.next <<= 9
+mat_size = 9
+pool_size = 9
+vecs_length = 9
 test_dict = {
 		'input_0': 0x80000001,
 		'input_1': 0x80000000,
@@ -140,9 +140,10 @@ test_dict = {
 		'input_5': 0x1f,
 		'input_6': 0x27,
 		'input_7': 0x58,
+		'input_8': 0x00,
 		'start': 1
 		}
-output_orig = [pyrtl.Output(32, 'out_orig_{}'.format(i)) for i in range(0, 8)]
+output_orig = [pyrtl.Output(32, 'out_orig_{}'.format(i)) for i in range(0, 9)]
 
 for index,reg in enumerate(reg_vec):
 	reg.next <<= inputs[index]
@@ -161,7 +162,7 @@ start_reg.next <<= start
 sim_trace = pyrtl.SimulationTrace()
 sim = pyrtl.Simulation(tracer=sim_trace)
 
-for cycle in range(40):
+for cycle in range(50):
 	sim.step(test_dict)
 	if(cycle > 1):
 		test_dict = {
@@ -173,6 +174,7 @@ for cycle in range(40):
 			'input_5': 0x1f,
 			'input_6': 0x27,
 			'input_7': 0x58,
+			'input_8': 0x00,
 			'start': 0
 			}
 
