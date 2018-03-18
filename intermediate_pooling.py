@@ -103,7 +103,7 @@ def intermediate_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 				with pool_count == pool_size:
 					pool_count.next |= 0
 					clear.next |= 1
-					single_list = line_pool_lists[0] # a list
+					single_list = line_pool_lists[0] # a list. need to change back to for loop
 					pooled_value = line_pool(single_list) # 1 value
 				with shifting == vecs_length:
 					pooling.next |= 0
