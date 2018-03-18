@@ -9,12 +9,28 @@ Compares two values and returns MAX ONLY
 '''
 def bit_compare(in0, in1):
 	out = pyrtl.WireVector(32)
-	# with pyrtl.conditional_assignment:
-	with in0 >= in1:
-		out |= in0
-	with pyrtl.otherwise:
+	with in0[-1] == 1 :
+		with in1[-1] == 0:
+			out |= in1
+		with otherwise:
+			with in0 >= in1:
+				out |= in0
+			with otherwise:
+				out |= in1
+	with in1[-1] == 1:
 		out |= in1
+	with otherwise:
+		with in0 >= in1:
+			out |= in0
+		with otherwise:
+			out |= in1
 	return out
+  	# with pyrtl.conditional_assignment:
+	# with in0 >= in1:
+	# 	out |= in0
+	# with pyrtl.otherwise:
+	# 	out |= in1
+	# return out
 
 '''
 Performs MAX pooling of pool_in (a fixed size reg list)
@@ -81,8 +97,8 @@ def intermediate_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 				clear.next |= 0
 				for vector in line_pool_lists:
 					for reg in vector:
-						# reg.next |= 0x80000000
-						reg.next |= 0
+						reg.next |= 0x80000000
+						# reg.next |= 0
 			with otherwise:
 				with pool_count == pool_size:
 					pool_count.next |= 0
@@ -116,8 +132,8 @@ mat_size = 8
 pool_size = 2
 vecs_length = 8
 test_dict = {
-		'input_0': 0x2d,
-		'input_1': 0x4,
+		'input_0': 0x80000001,
+		'input_1': 0x80000000,
 		'input_2': 0x35,
 		'input_3': 0xc,
 		'input_4': 0x1c,
@@ -149,8 +165,8 @@ for cycle in range(40):
 	sim.step(test_dict)
 	if(cycle > 1):
 		test_dict = {
-			'input_0': 0x2d,
-			'input_1': 0x4,
+			'input_0': 0x80000001,
+			'input_1': 0x80000000,
 			'input_2': 0x35,
 			'input_3': 0xc,
 			'input_4': 0x1c,
