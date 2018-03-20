@@ -152,7 +152,7 @@ def normalization(start, vecs, nvecs, matrix_size):
 			offset_amt.next |= 0
 			done.next |= 0 
 		with setup: #load line pool register 2d array
-			with counter < matrix_size:
+			with counter < matrix_size: #should this be -1 or not? it seems 
 				# counter.next |= counter+1
 				# for vector in range(matrix_size-1, 0, -1): #starts from bottom of 2d register array
 				# 	for index in range(0, matrix_size): #shifts down vecs in 2d array
