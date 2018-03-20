@@ -117,7 +117,7 @@ def intermediate_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 						int_reg_lists[list_index][-1].next |= 0x80000000
 					shifting.next |= shifting + 1
 					pool_count.next |= pool_count + 1
-	return single_list, pooled_value, shifting, pooling, setup, pool_count #needs more outputs.
+	return single_list, pooled_value, shifting, pooling, setup, pool_count, int_reg_lists #needs more outputs.
 
 
 # pyrtl.set_debug_mode()
@@ -148,13 +148,16 @@ output_orig = [pyrtl.Output(32, 'out_orig_{}'.format(i)) for i in range(0, 9)]
 for index,reg in enumerate(reg_vec):
 	reg.next <<= inputs[index]
 	output_orig[index] <<= reg
-single_list, pooled_value, shifting_wire, pooling_wire, setup_wire, pool_count = intermediate_pool(start, reg_vec, nvecs, vecs_length, mat_size, pool_size)
+single_list, pooled_value, shifting_wire, pooling_wire, setup_wire, pool_count, int_reg_lists = intermediate_pool(start, reg_vec, nvecs, vecs_length, mat_size, pool_size)
 probe(shifting_wire, 'shifting_wire')
 probe(pooling_wire, 'pooling_wire')
 probe(setup_wire, 'setup_wire')
 probe(pool_count, 'pool_count_wire')
 for count, i in enumerate(single_list):
 	probe(i, 'single_list_{}'.format(count))
+for count_1, vector in enumerate(int_reg_lists):
+	for count_2, i in enumerate(vector):
+		probe(i, 'int_reg_lists_{}_{}'.format(count_1, count_2))
 probe(pooled_value, 'pooled_value')
 
 start_reg.next <<= start
@@ -164,7 +167,7 @@ sim = pyrtl.Simulation(tracer=sim_trace)
 
 for cycle in range(50):
 	sim.step(test_dict)
-	if(cycle > 1):
+	if(cycle > 1 and cycle < 4):
 		test_dict = {
 			'input_0': 0x80000001,
 			'input_1': 0x80000000,
@@ -175,6 +178,19 @@ for cycle in range(50):
 			'input_6': 0x27,
 			'input_7': 0x58,
 			'input_8': 0x00,
+			'start': 0
+			}
+	if(cycle > 5):
+		test_dict = {
+			'input_0': 1,
+			'input_1': 2,
+			'input_2': 3,
+			'input_3': 4,
+			'input_4': 5,
+			'input_5': 6,
+			'input_6': 7,
+			'input_7': 8,
+			'input_8': 9,
 			'start': 0
 			}
 

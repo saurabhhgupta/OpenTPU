@@ -149,16 +149,24 @@ def normalization(start, vecs, nvecs, matrix_size):
 			offset.next |= 0
 			counter.next |= 0
 			offset_counter.next |= 0
-			offset_amt.next |= 1
+			offset_amt.next |= 0
 			done.next |= 0 
 		with setup: #load line pool register 2d array
-			with counter < matrix_size-1:
-				counter.next |= counter+1
-				for vector in range(matrix_size-1, 0, -1): #starts from bottom of 2d register array
-					for index in range(0, matrix_size): #shifts down vecs in 2d array
+			with counter < matrix_size:
+				# counter.next |= counter+1
+				# for vector in range(matrix_size-1, 0, -1): #starts from bottom of 2d register array
+				# 	for index in range(0, matrix_size): #shifts down vecs in 2d array
+				# 		line_pool_lists[vector][index].next |= line_pool_lists[vector-1][index]
+				# vector = line_pool_lists[0]
+				# for index, reg in enumerate(vector): #shifts in new vec
+				# 	reg.next |= vecs[index]
+				counter.next |= counter + 1
+				for vector in range(matrix_size-1, 0, -1): #reverse iteration of int_reg_lists until 2nd from top vector
+					for index in range(0, matrix_size): #shifts down
 						line_pool_lists[vector][index].next |= line_pool_lists[vector-1][index]
-				for index in range(0, matrix_size): #shifts in new vec
-					line_pool_lists[0][index].next |= vecs[index]
+				vector = line_pool_lists[0] #bas case
+				for index,reg in enumerate(vector): #shifts in new vals from vecs
+					reg.next |= vecs[index] #Need to make sure to pad the rest of list with 0x80000000?
 			with otherwise:
 				setup.next |= 0
 				phase_1.next |= 1
@@ -200,7 +208,7 @@ def normalization(start, vecs, nvecs, matrix_size):
 				output_list = line_pool_lists[0]
 				for vector in range(0, matrix_size-1):
 					for reg in range(0, matrix_size):
-						line_pool_lists[vector][reg] = line_pool_lists[vector+1][reg]
+						line_pool_lists[vector][reg].next |= line_pool_lists[vector+1][reg]
 				for reg in line_pool_lists[-1]:
 					reg.next |= 0x80000000
 				counter.next |= counter + 1
@@ -249,7 +257,7 @@ for index,reg in enumerate(line_out):
 	probe(i, 'line_out_{}'.format(index))
 for index_1, vector in enumerate(line_pool_lists):
 	for index_2, reg in enumerate(vector):
-		probe(i, 'line_pool_lists_{}_{}'.format(index_1, index_2))
+		probe(reg, 'line_pool_lists_{}_{}'.format(index_1, index_2))
 
 for index,reg in enumerate(reg_vec):
 	reg.next <<= inputs[index]
@@ -262,7 +270,7 @@ sim = pyrtl.Simulation(tracer=sim_trace)
 
 for cycle in range(50):
 	sim.step(test_dict)
-	if(cycle > 1 and cycle < 4):
+	if(cycle > 1 and cycle < 5):
 		test_dict = {
 			'input_0': 45,
 			'input_1': 4,
@@ -289,4 +297,4 @@ for cycle in range(50):
 # Now all we need to do is print the trace results to the screen. Here we use
 # "render_trace" with some size information.
 print('--- Simulation ---')
-sim_trace.render_trace(symbol_len=4, segment_size=3)
+sim_trace.render_trace(symbol_len=5, segment_size=5)
