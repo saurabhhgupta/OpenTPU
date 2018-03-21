@@ -153,13 +153,6 @@ def normalization(start, vecs, nvecs, matrix_size):
 			done.next |= 0 
 		with setup: #load line pool register 2d array
 			with counter < matrix_size: #should this be -1 or not? it seems 
-				# counter.next |= counter+1
-				# for vector in range(matrix_size-1, 0, -1): #starts from bottom of 2d register array
-				# 	for index in range(0, matrix_size): #shifts down vecs in 2d array
-				# 		line_pool_lists[vector][index].next |= line_pool_lists[vector-1][index]
-				# vector = line_pool_lists[0]
-				# for index, reg in enumerate(vector): #shifts in new vec
-				# 	reg.next |= vecs[index]
 				counter.next |= counter + 1
 				for vector in range(matrix_size-1, 0, -1): #reverse iteration of int_reg_lists until 2nd from top vector
 					for index in range(0, matrix_size): #shifts down
@@ -254,7 +247,7 @@ probe(output_wire, "output_wire")
 probe(counter_wire, "counter_wire")
 probe(max_val_wire, "max_val_wire")
 for index,reg in enumerate(line_out):
-	probe(i, 'line_out_{}'.format(index))
+	probe(reg, 'line_out_{}'.format(index))
 for index_1, vector in enumerate(line_pool_lists):
 	for index_2, reg in enumerate(vector):
 		probe(reg, 'line_pool_lists_{}_{}'.format(index_1, index_2))
@@ -282,6 +275,18 @@ for cycle in range(50):
 			'input_7': 88,
 			'start': 0
 			}
+	elif (cycle >= 5):
+		test_dict = {
+			'input_0': 1,
+			'input_1': 2,
+			'input_2': 3,
+			'input_3': 4,
+			'input_4': 5,
+			'input_5': 6,
+			'input_6': 7,
+			'input_7': 500,
+			'start': 0
+			}
 	else:
 		test_dict = {
 			'input_0': 1,
@@ -291,7 +296,7 @@ for cycle in range(50):
 			'input_4': 5,
 			'input_5': 6,
 			'input_6': 7,
-			'input_7': 100,
+			'input_7': 150,
 			'start': 0
 			}
 # Now all we need to do is print the trace results to the screen. Here we use
