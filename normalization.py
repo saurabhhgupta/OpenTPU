@@ -186,6 +186,7 @@ def normalization(start, vecs, nvecs, matrix_size):
 				offset_counter.next |= 0
 			with otherwise:
 				offset_counter.next |= offset_counter+1
+				#missing shifting case
 		with nrml:
 			nrml.next |= 0
 			output.next |= 1
