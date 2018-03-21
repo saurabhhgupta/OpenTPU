@@ -123,6 +123,8 @@ def line_pool(pool_in):
 '''
 Rather than reusing full_pool, why not perform line_pool matrix_size times and then line_pool the result?.
 It is a simple function to write and would keep the hardware separate. 
+
+NOTE: ONLY READ OUTPUT WHEN OUTPUT SIGNAL IS HIGH
 '''
 def normalization(start, vecs, nvecs, matrix_size):
 	line_pool_lists = [[Register(32) for i in range(0, matrix_size)] for j in range(0, matrix_size)]
@@ -137,9 +139,10 @@ def normalization(start, vecs, nvecs, matrix_size):
 	offset = Register(1)
 	output = Register(1)
 	done = Register(1)
+	one_bit = Register(1)
 	counter = Register(int(math.log(matrix_size,2))+1)
 	offset_counter = Register(int(math.log(32, 2)))
-	offset_amt= Register(5)
+	offset_amt= Register(int(math.log(32,2)))
 	with conditional_assignment:
 		with start:
 			setup.next |= 1
@@ -151,6 +154,7 @@ def normalization(start, vecs, nvecs, matrix_size):
 			offset_counter.next |= 0
 			offset_amt.next |= 0
 			done.next |= 0 
+			one_bit.next |= 1
 		with setup: #load line pool register 2d array
 			with counter < matrix_size: #should this be -1 or not? it seems 
 				counter.next |= counter + 1
@@ -173,12 +177,12 @@ def normalization(start, vecs, nvecs, matrix_size):
 			max_val.next |= line_pool(line_out)
 			phase_2.next |= 0
 			offset.next |= 1
+			offset_counter.next |= 0
 		with offset:
-			with max_val[0] == 1:
+			with max_val[31] == 1:
 				offset.next |= 0
 				nrml.next |= 1
 				offset_amt.next |= 24-offset_counter
-				offset_counter.next |= 0
 			with offset_counter == 24:
 				offset.next |= 0
 				nrml.next |= 1
@@ -186,6 +190,7 @@ def normalization(start, vecs, nvecs, matrix_size):
 				offset_counter.next |= 0
 			with otherwise:
 				offset_counter.next |= offset_counter+1
+				max_val.next |= barrel_shifter_v2(max_val, 0, 1, one_bit)
 				#missing shifting case
 		with nrml:
 			nrml.next |= 0
@@ -195,7 +200,7 @@ def normalization(start, vecs, nvecs, matrix_size):
 				for reg in vector:
 					reg.next |= barrel_shifter_v2(reg, 0, 0, offset_amt)
 		with output:
-			with counter == matrix_size:
+			with counter == matrix_size - 1:
 				done.next |= 1
 				output.next |= 0
 			with otherwise:
@@ -206,7 +211,7 @@ def normalization(start, vecs, nvecs, matrix_size):
 				for reg in line_pool_lists[-1]:
 					reg.next |= 0x80000000
 				counter.next |= counter + 1
-	return output_list, line_out, line_pool_lists, done, setup, phase_1, phase_2, nrml, offset, output, counter, max_val
+	return output_list, offset_amt, offset_counter, line_out, line_pool_lists, done, setup, phase_1, phase_2, nrml, offset, output, counter, max_val
 
 
 reg_vec = [pyrtl.Register(32, 'reg_{}'.format(i)) for i in range(0, 8)]
@@ -219,19 +224,19 @@ mat_size = 8
 pool_size = 2
 vecs_length = 8
 test_dict = {
-		'input_0': 3,
-		'input_1': 39,
-		'input_2': 17,
-		'input_3': 7,
-		'input_4': 42,
-		'input_5': 18,
-		'input_6': 100,
-		'input_7': 6,
+		'input_0': 8,
+		'input_1': 8,
+		'input_2': 8,
+		'input_3': 8,
+		'input_4': 8,
+		'input_5': 8,
+		'input_6': 8,
+		'input_7': 8,
 		'start': 1
 		}
-output_orig = [pyrtl.Output(32, 'out_orig_{}'.format(i)) for i in range(0, 8)]
+
 # output_nrml = [pyrtl.Output(8, 'out_nrml_{}'.format(i)) for i in range(0, 8)]
-output_list, line_out, line_pool_lists, done, setup_wire, phase_1_wire, phase_2_wire, nrml_wire, offset_wire, output_wire, counter_wire, max_val_wire = normalization(start, reg_vec, nvecs, mat_size)
+output_list, offset_amt, offset_counter, line_out, line_pool_lists, done, setup_wire, phase_1_wire, phase_2_wire, nrml_wire, offset_wire, output_wire, counter_wire, max_val_wire = normalization(start, reg_vec, nvecs, mat_size)
 # for count,reg in enumerate(output_list):
 #  	probe(reg, "out_{}".format(count))
 # for index, reg in enumerate(output_list):
@@ -247,6 +252,8 @@ probe(offset_wire, "offset_wire")
 probe(output_wire, "output_wire")
 probe(counter_wire, "counter_wire")
 probe(max_val_wire, "max_val_wire")
+probe(offset_amt, "offset_amt")
+probe(offset_counter, "offset_counter")
 for index,reg in enumerate(line_out):
 	probe(reg, 'line_out_{}'.format(index))
 for index_1, vector in enumerate(line_pool_lists):
@@ -255,7 +262,6 @@ for index_1, vector in enumerate(line_pool_lists):
 
 for index,reg in enumerate(reg_vec):
 	reg.next <<= inputs[index]
-	output_orig[index] <<= reg
 
 start_reg.next <<= start
 
@@ -264,42 +270,68 @@ sim = pyrtl.Simulation(tracer=sim_trace)
 
 for cycle in range(50):
 	sim.step(test_dict)
-	if(cycle > 1 and cycle < 5):
-		test_dict = {
-			'input_0': 45,
-			'input_1': 4,
-			'input_2': 53,
-			'input_3': 12,
-			'input_4': 28,
-			'input_5': 31,
-			'input_6': 39,
-			'input_7': 88,
-			'start': 0
-			}
-	elif (cycle >= 5):
+	if cycle == 1:
 		test_dict = {
 			'input_0': 1,
-			'input_1': 2,
-			'input_2': 3,
-			'input_3': 4,
-			'input_4': 5,
-			'input_5': 6,
-			'input_6': 7,
-			'input_7': 500,
+			'input_1': 1,
+			'input_2': 1,
+			'input_3': 1,
+			'input_4': 1,
+			'input_5': 1,
+			'input_6': 1,
+			'input_7': 1,
 			'start': 0
 			}
+	elif cycle == 2:
+		test_dict = {
+			'input_0': 2,
+			'input_1': 2,
+			'input_2': 2,
+			'input_3': 2,
+			'input_4': 2,
+			'input_5': 2,
+			'input_6': 2,
+			'input_7': 2,
+			'start': 0
+			}
+	elif cycle == 3:
+		test_dict = {
+			'input_0': 512,
+			'input_1': 512,
+			'input_2': 512,
+			'input_3': 512,
+			'input_4': 512,
+			'input_5': 512,
+			'input_6': 512,
+			'input_7': 512,
+			'start': 0
+			}
+	elif cycle == 4:
+		test_dict = {
+			'input_0': 256,
+			'input_1': 256,
+			'input_2': 256,
+			'input_3': 256,
+			'input_4': 256,
+			'input_5': 256,
+			'input_6': 256,
+			'input_7': 256,
+			'start': 0
+	}
 	else:
 		test_dict = {
-			'input_0': 1,
-			'input_1': 2,
-			'input_2': 3,
-			'input_3': 4,
-			'input_4': 5,
-			'input_5': 6,
-			'input_6': 7,
-			'input_7': 150,
+			'input_0': 0,
+			'input_1': 0,
+			'input_2': 0,
+			'input_3': 0,
+			'input_4': 0,
+			'input_5': 0,
+			'input_6': 0,
+			'input_7': 0,
 			'start': 0
 			}
+
+
 # Now all we need to do is print the trace results to the screen. Here we use
 # "render_trace" with some size information.
 print('--- Simulation ---')

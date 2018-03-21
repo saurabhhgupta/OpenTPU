@@ -156,7 +156,7 @@ def nrml_test(start, vecs, vec_length):
                 max_val.next |= line_pool(reg_list)
         with offset:
             with max_val[31] == 1:
-                shift_amt.next |= counter
+                shift_amt.next |= 24-counter
                 offset.next |= 0
                 done.next |= 1
             with otherwise: #technically missing 0 = max case
