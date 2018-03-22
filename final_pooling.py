@@ -59,12 +59,14 @@ def final_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 	int_reg_lists = [[Register(32) for i in range(0, matrix_size)] for j in range(0, matrix_size)]
 	line_pool_lists = [[Register(32) for i in range(0, matrix_size)] for j in range(0, matrix_size)]
 	final_pool_list = []
+	across_each_index = []
 
 	shifting = Register(int(math.log(matrix_size, 2)) + 1) #max length of matrix_size
 	pool_count = Register(int(math.log(matrix_size, 2))+1)
 	setup = Register(1) #setup of reg lists
 	pooling = Register(1)
 	clear = Register(1)
+	trigger = Register(1)
 
 	with conditional_assignment:
 		with start: # wait until 2d array from int_pool is full
@@ -93,13 +95,16 @@ def final_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 				for vector in line_pool_lists:
 					for reg in vector:
 						reg.next |= 0x80000000
-						# reg.next |= 0
 			with otherwise:
 				with pool_count == pool_size:
 					pool_count.next |= 0
 					clear.next |= 1
-					for i in line_pool_lists:
-						final_pool_list.append(line_pool(i))
+					for i in range(0, matrix_size):
+						for j in line_pool_lists:
+							temp.append(j[i])
+						final_pool_list.append(line_pool(temp))
+						del temp[:]
+					output_pool = line_pool(final_pool_list)
 				with shifting == vecs_length:
 					pooling.next |= 0
 				with pool_count < pool_size:
@@ -112,7 +117,7 @@ def final_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 						int_reg_lists[list_index][-1].next |= 0x80000000
 					shifting.next |= shifting + 1
 					pool_count.next |= pool_count + 1
-	return final_pool_list, shifting, pooling, setup, pool_count, int_reg_lists #needs more outputs.
+	return output_pool, shifting, pooling, setup, pool_count, int_reg_lists #needs more outputs.
 
 
 # pyrtl.set_debug_mode()

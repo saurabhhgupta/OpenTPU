@@ -54,7 +54,7 @@ def mux_padding(start, vecs, vecs_length, nvecs, matrix_size):
 			counter.next |= 0
 			done.next |= 0	
 			busy.next |= 1
-			mux_control.next |= barrel_shifter_v2(mask, 0, 1, vecs_length)
+			mux_control.next |= barrel_shifter_v2(mask, 0, 0, vecs_length)
 		with busy:
 			counter.next |= counter + 1
 			with counter == matrix_size:
@@ -63,16 +63,17 @@ def mux_padding(start, vecs, vecs_length, nvecs, matrix_size):
 			with counter >= nvecs-1: #checks to see if all values have been passed in. 
 				mux_control.next |= mask
 			with otherwise: 
-				mux_control.next |= barrel_shifter_v2(mask, 0, 1, vecs_length)
+				mux_control.next |= barrel_shifter_v2(mask, 0, 0, vecs_length)
 			for i in range(0, matrix_size):
 				output_vecs[i].next |= mux(mux_control[i], vecs[i], constant_val)
+				probe(mux_control[i], 'mux_control[i]_{}'.format(i))
 	return output_vecs, mux_control, counter, busy, done, mask
 
 reg_vec = [pyrtl.Register(32, 'reg_{}'.format(i)) for i in range(0, 8)]
 inputs = [pyrtl.Input(32, 'input_{}'.format(i)) for i in range(0, 8)]
 start = pyrtl.Input(1, 'start')	
 nvecs = pyrtl.Register(8, 'nvecs')
-vecs_length = Const(4)
+vecs_length = Const(3) # For Joseph --- change this
 nvecs.next <<= 6
 mat_size = 8
 test_dict = {
@@ -122,4 +123,4 @@ for cycle in range(30):
 # Now all we need to do is print the trace results to the screen. Here we use
 # "render_trace" with some size information.
 print('--- Simulation ---')
-sim_trace.render_trace(symbol_len=12, segment_size=5)
+sim_trace.render_trace(symbol_len=5, segment_size=5)

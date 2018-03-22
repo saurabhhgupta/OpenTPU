@@ -107,3 +107,11 @@ def intermediate_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 					shifting.next |= shifting + 1
 					pool_count.next |= pool_count + 1
 	return out_list, shifting, pooling, setup, pool_count, int_reg_lists #needs more outputs.
+
+
+	def pool_top(pool_en, data):
+		with pool_en == 1:
+			pool_matrix = full_pool()
+		with otherwise:
+			ub_matrix = normalize(pool_matrix):
+		return ub_matrix
