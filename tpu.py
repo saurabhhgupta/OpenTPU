@@ -81,7 +81,7 @@ with conditional_assignment:
 #  Normalization / Pool Unit
 ############################################################
 
-# pool_out = pool_top(dest_addr=ub_dest_addr)
+# pool_out = pool_top()
 
 
 ############################################################

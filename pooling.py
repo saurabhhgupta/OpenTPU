@@ -51,9 +51,10 @@ pool_size - self explanatory
 def intermediate_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 	int_reg_lists = [[Register(32) for i in range(0, matrix_size)] for j in range(0, matrix_size)]
 	line_pool_lists = [[Register(32) for i in range(0, matrix_size)] for j in range(0, matrix_size)]
+	out_list = []
 
 	shifting = Register(int(math.log(matrix_size, 2)) + 1) #max length of matrix_size
-	pool_count = Register(int(math.log(matrix_size, 2))+1)
+	pool_count = Register(int(math.log(matrix_size, 2)) + 1)
 	setup = Register(1) #setup of reg lists
 	pooling = Register(1)
 	clear = Register(1)
@@ -85,13 +86,14 @@ def intermediate_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 				for vector in line_pool_lists:
 					for reg in vector:
 						reg.next |= 0x80000000
-						# reg.next |= 0
 			with otherwise:
 				with pool_count == pool_size:
 					pool_count.next |= 0
 					clear.next |= 1
-					single_list = line_pool_lists[0] # a list. need to change back to for loop
-					pooled_value = line_pool(single_list) # 1 value
+					for i in line_pool_lists:
+						out_list.append(i)
+					# single_list = line_pool_lists[0] # a list. need to change back to for loop
+					# pooled_value = line_pool(single_list) # 1 value
 				with shifting == vecs_length:
 					pooling.next |= 0
 				with pool_count < pool_size:
@@ -104,4 +106,4 @@ def intermediate_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 						int_reg_lists[list_index][-1].next |= 0x80000000
 					shifting.next |= shifting + 1
 					pool_count.next |= pool_count + 1
-	return single_list, pooled_value, shifting, pooling, setup, pool_count, int_reg_lists #needs more outputs.
+	return out_list, shifting, pooling, setup, pool_count, int_reg_lists #needs more outputs.

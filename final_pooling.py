@@ -25,12 +25,6 @@ def bit_compare(in0, in1):
 		with otherwise:
 			out |= in1
 	return out
-  	# with pyrtl.conditional_assignment:
-	# with in0 >= in1:
-	# 	out |= in0
-	# with pyrtl.otherwise:
-	# 	out |= in1
-	# return out
 
 '''
 Performs MAX pooling of pool_in (a fixed size reg list)
@@ -73,7 +67,7 @@ def final_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 	clear = Register(1)
 
 	with conditional_assignment:
-		with start:
+		with start: # wait until 2d array from int_pool is full
 			shifting.next |= 0
 			setup.next |= 1
 			pooling.next |= 0
@@ -104,8 +98,6 @@ def final_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 				with pool_count == pool_size:
 					pool_count.next |= 0
 					clear.next |= 1
-					# single_list = line_pool_lists[0] # a list. need to change back to for loop
-					# pooled_value = line_pool(single_list) # 1 value
 					for i in line_pool_lists:
 						final_pool_list.append(line_pool(i))
 				with shifting == vecs_length:
@@ -120,7 +112,7 @@ def final_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 						int_reg_lists[list_index][-1].next |= 0x80000000
 					shifting.next |= shifting + 1
 					pool_count.next |= pool_count + 1
-	return concat_list(final_pool_list), shifting, pooling, setup, pool_count, int_reg_lists #needs more outputs.
+	return final_pool_list, shifting, pooling, setup, pool_count, int_reg_lists #needs more outputs.
 
 
 # pyrtl.set_debug_mode()
