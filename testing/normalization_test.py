@@ -93,10 +93,11 @@ Shift_test works for truncation
 '''
 def shift_test(start, vecs, vecs_length, shift_amt): 
     reg_list = [Register(32) for i in range(0, vecs_length)]
+    reg_list_2 = [Register(32) for i in range(0, vecs_length)]
     setup = Register(1)
     shifting = Register(1)
     done = Register(1)
-    shift_num = Register(3)
+    shift_num = Register(4)
     counter = Register(int(math.log(vecs_length, 2))+1)
 
     with conditional_assignment:
@@ -118,10 +119,10 @@ def shift_test(start, vecs, vecs_length, shift_amt):
                 setup.next |= 0
         with shifting:
             for index in range(0, vecs_length):
-                reg_list[index].next |= barrel_shifter_v2(reg_list[index], 0, 0, shift_num)
+                reg_list_2[index].next |= barrel_shifter_v2(reg_list[index], 0, 0, shift_num)
             shifting.next |= 0
             done.next |= 1
-    return reg_list, start, setup, shifting, done, counter
+    return reg_list_2, start, setup, shifting, done, counter
 
 '''
 Test finding number of bits to shift
@@ -165,6 +166,64 @@ def nrml_test(start, vecs, vec_length):
     return shift_amt, counter, start, setup, offset, max_val, done
 
 # ---------shift_test here ---------
+reg_vec = [pyrtl.Register(32, 'reg_{}'.format(i)) for i in range(0, 8)]
+inputs = [pyrtl.Input(32, 'input_{}'.format(i)) for i in range(0, 8)]
+start = pyrtl.Input(1, 'start')
+start_reg = pyrtl.Register(1, 'start_reg')
+nvecs = pyrtl.Register(4, 'nvecs')
+nvecs.next <<= 8
+mat_size = 8
+pool_size = 2
+vecs_length = 8
+shift_amt = 4
+test_dict = {
+        'input_0': 1,
+        'input_1': 2,
+        'input_2': 3,
+        'input_3': 4,
+        'input_4': 32,
+        'input_5': 64,
+        'input_6': 128,
+        'input_7': 256,
+        'start': 1
+        }
+output_orig = [pyrtl.Output(32, 'out_{}'.format(i)) for i in range(0, vecs_length)]
+reg_list, w_start, w_setup, w_shifting , w_done, w_counter = shift_test(start, reg_vec, vecs_length, shift_amt)
+
+for index,reg in enumerate(reg_vec):
+    reg.next <<= inputs[index]
+for index,reg in enumerate(reg_list):
+    output_orig[index] <<= reg
+start_reg.next <<= start
+probe(w_start, "w_start")
+probe(w_setup, "w_setup")
+probe(w_shifting, "w_shifting")
+probe(w_done, "w_done")
+probe(w_counter, "w_counter")
+
+sim_trace = pyrtl.SimulationTrace()
+sim = pyrtl.Simulation(tracer=sim_trace)
+
+for cycle in range(20):
+    sim.step(test_dict)
+    if(cycle > 1):
+        test_dict = {
+            'input_0': 1, #should return 0
+            'input_1': 2, #should return 1
+            'input_2': 3, #should return 1
+            'input_3': 4, #should return 2
+            'input_4': 32, #should return 16
+            'input_5': 64, #should return 32
+            'input_6': 128, #should return 64 
+            'input_7': 256, #should return 128
+            'start': 0  
+            }
+# Now all we need to do is print the trace results to the screen. Here we use
+# "render_trace" with some size information.
+print('--- Simulation ---')
+sim_trace.render_trace(symbol_len=5, segment_size=5)
+
+# -------nrml_test here--------
 # reg_vec = [pyrtl.Register(32, 'reg_{}'.format(i)) for i in range(0, 8)]
 # inputs = [pyrtl.Input(32, 'input_{}'.format(i)) for i in range(0, 8)]
 # start = pyrtl.Input(1, 'start')
@@ -186,24 +245,25 @@ def nrml_test(start, vecs, vec_length):
 #         'input_7': 256,
 #         'start': 1
 #         }
-# output_orig = [pyrtl.Output(32, 'out_{}'.format(i)) for i in range(0, vecs_length)]
-# reg_list, w_start, w_setup, w_shifting , w_done, w_counter = shift_test(start, reg_vec, vecs_length, shift_amt)
+# # output_val = Output(int(math.log(vecs_length, 2))+1, 'output_amt')
+# output_amt, counter, start, setup, offset, max_val, done = nrml_test(start, reg_vec, vecs_length)
 
 # for index,reg in enumerate(reg_vec):
 #     reg.next <<= inputs[index]
-# for index,reg in enumerate(reg_list):
-#     output_orig[index] <<= reg
+# # output_val <<= output_amt
 # start_reg.next <<= start
-# probe(w_start, "w_start")
-# probe(w_setup, "w_setup")
-# probe(w_shifting, "w_shifting")
-# probe(w_done, "w_done")
-# probe(w_counter, "w_counter")
+# probe(output_amt, 'shift_amt')
+# probe(setup, "w_setup")
+# probe(offset, "w_offset")
+# probe(done, "w_done")
+# probe(max_val, 'max_val')
+# probe(counter, 'counter')
+
 
 # sim_trace = pyrtl.SimulationTrace()
 # sim = pyrtl.Simulation(tracer=sim_trace)
 
-# for cycle in range(20):
+# for cycle in range(60):
 #     sim.step(test_dict)
 #     if(cycle > 1):
 #         test_dict = {
@@ -221,62 +281,3 @@ def nrml_test(start, vecs, vec_length):
 # # "render_trace" with some size information.
 # print('--- Simulation ---')
 # sim_trace.render_trace(symbol_len=5, segment_size=5)
-
-# -------nrml_test here--------
-reg_vec = [pyrtl.Register(32, 'reg_{}'.format(i)) for i in range(0, 8)]
-inputs = [pyrtl.Input(32, 'input_{}'.format(i)) for i in range(0, 8)]
-start = pyrtl.Input(1, 'start')
-start_reg = pyrtl.Register(1, 'start_reg')
-nvecs = pyrtl.Register(4, 'nvecs')
-nvecs.next <<= 8
-mat_size = 8
-pool_size = 2
-vecs_length = 8
-shift_amt = 3
-test_dict = {
-        'input_0': 1,
-        'input_1': 2,
-        'input_2': 3,
-        'input_3': 4,
-        'input_4': 32,
-        'input_5': 64,
-        'input_6': 128,
-        'input_7': 256,
-        'start': 1
-        }
-# output_val = Output(int(math.log(vecs_length, 2))+1, 'output_amt')
-output_amt, counter, start, setup, offset, max_val, done = nrml_test(start, reg_vec, vecs_length)
-
-for index,reg in enumerate(reg_vec):
-    reg.next <<= inputs[index]
-# output_val <<= output_amt
-start_reg.next <<= start
-probe(output_amt, 'shift_amt')
-probe(setup, "w_setup")
-probe(offset, "w_offset")
-probe(done, "w_done")
-probe(max_val, 'max_val')
-probe(counter, 'counter')
-
-
-sim_trace = pyrtl.SimulationTrace()
-sim = pyrtl.Simulation(tracer=sim_trace)
-
-for cycle in range(60):
-    sim.step(test_dict)
-    if(cycle > 1):
-        test_dict = {
-            'input_0': 1, #should return 0
-            'input_1': 2, #should return 1
-            'input_2': 3, #should return 1
-            'input_3': 4, #should return 2
-            'input_4': 32, #should return 16
-            'input_5': 64, #should return 32
-            'input_6': 128, #should return 64 
-            'input_7': 256, #should return 128
-            'start': 0  
-            }
-# Now all we need to do is print the trace results to the screen. Here we use
-# "render_trace" with some size information.
-print('--- Simulation ---')
-sim_trace.render_trace(symbol_len=5, segment_size=5)
