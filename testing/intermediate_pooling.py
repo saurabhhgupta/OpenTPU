@@ -122,11 +122,11 @@ def intermediate_pool(start, vecs, nvecs, vecs_length, matrix_size, pool_size):
 
 # pyrtl.set_debug_mode()
 
-reg_vec = [pyrtl.Register(32, 'reg_{}'.format(i)) for i in range(0, 9)]
+reg_vec = [pyrtl.Register(32) for i in range(0, 9)]
 inputs = [pyrtl.Input(32, 'input_{}'.format(i)) for i in range(0, 9)]
 start = pyrtl.Input(1, 'start')
-start_reg = pyrtl.Register(1, 'start_reg')
-nvecs = pyrtl.Register(5, 'nvecs')
+start_reg = pyrtl.Register(1)
+nvecs = pyrtl.Register(5)
 nvecs.next <<= 9
 mat_size = 9
 pool_size = 9
@@ -143,21 +143,21 @@ test_dict = {
 		'input_8': 0x00,
 		'start': 1
 		}
-output_orig = [pyrtl.Output(32, 'out_orig_{}'.format(i)) for i in range(0, 9)]
+# output_orig = [pyrtl.Output(32, 'out_orig_{}'.format(i)) for i in range(0, 9)]
 
 for index,reg in enumerate(reg_vec):
 	reg.next <<= inputs[index]
-	output_orig[index] <<= reg
+	# output_orig[index] <<= reg
 single_list, pooled_value, shifting_wire, pooling_wire, setup_wire, pool_count, int_reg_lists = intermediate_pool(start, reg_vec, nvecs, vecs_length, mat_size, pool_size)
-probe(shifting_wire, 'shifting_wire')
-probe(pooling_wire, 'pooling_wire')
-probe(setup_wire, 'setup_wire')
-probe(pool_count, 'pool_count_wire')
+probe(shifting_wire, 'w_counter')
+probe(pooling_wire, 'w_pooling')
+probe(setup_wire, 'w_setup')
+probe(pool_count, 'w_pool_count')
 for count, i in enumerate(single_list):
 	probe(i, 'single_list_{}'.format(count))
-for count_1, vector in enumerate(int_reg_lists):
-	for count_2, i in enumerate(vector):
-		probe(i, 'int_reg_lists_{}_{}'.format(count_1, count_2))
+# for count_1, vector in enumerate(int_reg_lists):
+# 	for count_2, i in enumerate(vector):
+# 		probe(i, 'int_reg_lists_{}_{}'.format(count_1, count_2))
 probe(pooled_value, 'pooled_value')
 
 start_reg.next <<= start
@@ -167,7 +167,7 @@ sim = pyrtl.Simulation(tracer=sim_trace)
 
 for cycle in range(50):
 	sim.step(test_dict)
-	if(cycle > 1 and cycle < 4):
+	if(cycle >= 1 and cycle < 4):
 		test_dict = {
 			'input_0': 0x80000001,
 			'input_1': 0x80000000,
@@ -194,7 +194,7 @@ for cycle in range(50):
 			'start': 0
 			}
 
-print('--- Simulation ---')
+print('--- Phase-1 Pooling Simulation ---')
 sim_trace.render_trace(symbol_len=5, segment_size=5)
 
 # pyrtl.working_block().sanity_check()

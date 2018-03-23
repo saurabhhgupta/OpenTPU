@@ -58,7 +58,7 @@ output <<= line_pool(input_vec)
 sim_trace = pyrtl.SimulationTrace()
 sim = pyrtl.Simulation(tracer=sim_trace)
 
-for cycle in range(35):
+for cycle in range(10):
 	sim.step(test_dict)
 
 print('--- line_pool() simulation ---')

@@ -29,7 +29,7 @@ def relu(vec):
 #         'c': random.choice([0, 1])
 #         })
 
-reg_vec = [pyrtl.Register(32, 'reg_{}'.format(i)) for i in range(0, 8)]
+reg_vec = [pyrtl.Register(32) for i in range(0, 8)]
 inputs = [pyrtl.Input(32, 'input_{}'.format(i)) for i in range(0, 8)]
 test_dict = {
 		'input_0': 3,
@@ -61,7 +61,7 @@ for cycle in range(35):
 
 # Now all we need to do is print the trace results to the screen. Here we use
 # "render_trace" with some size information.
-print('--- Simulation ---')
+print('--- ReLU Simulation ---')
 sim_trace.render_trace(symbol_len=5, segment_size=5)
 
 # a_value = sim.inspect(a)
